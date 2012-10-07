@@ -3,12 +3,22 @@
 #==============================================================================
 describe 'reporter', ->
   loadFile = require('mocks').loadFile
-  m = null
+  m = b = browserMock = null
 
   beforeEach ->
     m = loadFile __dirname + '/../../../lib/reporters/Base.js'
+    b = loadFile __dirname + '/../../../lib/browser.js'
+    browserMock = new b.Browser('Browser', null, null)
+    resultMock = new b.Result()
+    resultMock.total = 6
+    resultMock.skipped = 1
+    resultMock.failed = 2
+    resultMock.success = 3
+    resultMock.netTime = 3
+    resultMock.totalTime = 5   
+    browserMock.lastResult = resultMock
 
-  describe 'Progress', ->
+  describe 'Base', ->
     adapter = reporter = null
 
     beforeEach ->
@@ -31,4 +41,19 @@ describe 'reporter', ->
 
       expect(adapter).toHaveBeenCalledWith 'Success: 10 Failure: 20'
 
-    
+    it 'should display the execution ratio', ->
+      msg = reporter.renderBrowser(browserMock)
+      expect(msg).toMatch /Executed 5 of 6/
+
+    it 'should display the number of failed specs', ->
+      msg = reporter.renderBrowser(browserMock)
+      expect(msg).toMatch /(2 FAILED)/
+
+    it 'should display the number of skipped specs', ->
+      msg = reporter.renderBrowser(browserMock)
+      expect(msg).toMatch /(skipped 1)/
+
+    it 'should display the execution time ration', ->
+      msg = reporter.renderBrowser(browserMock)
+      expect(msg).toMatch /(0.005 secs \/ 0.003 secs)/
+
