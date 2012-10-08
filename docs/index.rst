@@ -3,28 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-========================
+.. toctree:: 
+  :maxdepth: 1
+  :hidden:
+
+  self
+  user
+  developer
+
+
 Testacular Documentation
 ========================
 
 This is the documentation for the spectacular testacular project.
 
-
-Content
-=======
-.. toctree:: 
-  :maxdepth: 1
-  :hidden:
-  
-  self
-  installation  
-  browsers
-  client-server-protocol
-  events
-
-
-Overview
-========
 
 What is it good for?
 ###############
@@ -68,7 +60,7 @@ that's great - check out adapter/jasmine.src.js and write your own.
 Browsers Supported
 ###############
 
-Please see :doc:`browser` for details on supported Browsers and how to configure non-default paths.
+Please see :doc:`user/browsers` for details on supported Browsers and how to configure non-default paths.
 
 Why am I doing this?
 ################
