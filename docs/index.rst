@@ -13,7 +13,7 @@ This is the documentation for the spectacular testacular project.
 Content
 =======
 .. toctree:: 
-  :maxdepth: 2
+  :maxdepth: 1
   
   installation
   browser
