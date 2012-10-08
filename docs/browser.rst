@@ -23,7 +23,7 @@ Available browsers:
 Correct path to browser binary
 #########################
 Testacular has some default paths, where to find these browsers.
-Check out `launcher`_ to see them.
+Check out `launcher`_ to see them. 
 
 You can override these settings by ``<BROWSER>_BIN`` env variable.
 
