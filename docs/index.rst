@@ -31,7 +31,7 @@ Let's do it!
 
 Go into your project and create a testacular configuration. Basically you need to specify the source files that you want to execute.
 
-For an example configuration, see test/client/testacular.conf.js which
+For an example configuration, see `test/client/testacular.conf.js`_ which
 contains most of the options.
 
 .. code-block:: bash
@@ -65,14 +65,14 @@ Please see :doc:`user/browsers` for details on supported Browsers and how to con
 Why am I doing this?
 ################
 
-Throughout the development of AngularJS, we've been using JSTD for testing. I really think that JSTD is a great idea. Unfortunately, we had many problems with JSTD, so we decided to write our own test runner based on the same idea. We wanted a simple tool just for executing JavaScript tests that is both stable and fast. That's why we use the awesome Socket.io library and `Node.js`_.
+Throughout the development of `AngularJS`_, we've been using `JSTD`_ for testing. I really think that JSTD is a great idea. Unfortunately, we had many problems with JSTD, so we decided to write our own test runner based on the same idea. We wanted a simple tool just for executing JavaScript tests that is both stable and fast. That's why we use the awesome Socket.io`_ library and `Node.js`_.
 
 
 Development
 ##########
 
 If you are thinking about making Testacular better, or you just want
-to hack on it, that's great - fork the repo and become a contributor!
+to hack on it, that's great - `fork the repo`_ and become `a contributor`_!
 
 .. code-block:: bash
 
@@ -90,16 +90,15 @@ Tips for contributing
 * send pull request requesting a merge to ``master`` branch (not to default ``stable``)
 
 
-If you have any further questions, join the mailing
-list or submit an issue.
+If you have any further questions, join the `mailing list`_ or submit an `issue`_.
 
-You can follow @TestacularJS as well.
+You can follow `@TestacularJS`_ as well.
 
 
 Versions
 #######
 
-Testacular uses Semantic Versioning. All even versions (eg. ``0.2.x``, ``0.4.x``) are considered to
+Testacular uses `Semantic Versioning`_. All even versions (eg. ``0.2.x``, ``0.4.x``) are considered to
 be stable - no breaking changes, only bug fixes.
 
 Stable channel (branch "stable")
@@ -114,4 +113,18 @@ Canary channel (branch "master")
 
   npm install -g testacular@canary
 
-.. _Node.js: http://nodejs.org
+.. _Node.js: http://nodejs.org/
+.. _AngularJS: http://angularjs.org/
+.. _JSTD: http://code.google.com/p/js-test-driver/
+.. _Socket.io: http://socket.io/
+.. _NVM: https://github.com/creationix/nvm
+.. _Grunt: http://gruntjs.com/
+.. _Jasmine: http://pivotal.github.com/jasmine/
+.. _Mocha: http://visionmedia.github.com/mocha/
+.. _fork the repo: https://github.com/vojtajina/testacular/fork_select
+.. _a contributor: https://github.com/vojtajina/testacular/graphs/contributors
+.. _Semantic Versioning: http://semver.org/
+.. _test/client/testacular.conf.js: https://github.com/vojtajina/testacular/blob/master/test/client/testacular.conf.js
+.. _@TestacularJS: http://twitter.com/TestacularJS
+.. _mailing list: https://groups.google.com/forum/#!forum/testacular
+.. _issue: https://github.com/vojtajina/testacular/issues/new
