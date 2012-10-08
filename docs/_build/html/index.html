@@ -47,6 +47,99 @@
 <h1>Welcome to Testacular<a class="headerlink" href="#welcome-to-testacular" title="Permalink to this headline">¶</a></h1>
 <p>A simple tool that allows you to execute JavaScript code in multiple <em>real</em> browsers, powered by Node.js and Socket.io.</p>
 <p><strong>The main purpose of Testacular is to make your TDD development easy, fast, and fun.</strong></p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>First, you need to install Node.js. There are installers for both
+Macintosh and Windows. On Linux, we recommend using NVM.</p>
+<div class="highlight-python"><pre>sudo npm install -g testacular</pre>
+</div>
+<p>or install in a local folder (you have to create symlinks to binaries
+on your own):</p>
+<div class="highlight-python"><pre>npm install testacular</pre>
+</div>
+<p>You can install Testacular even without NPM, just get the latest
+package and create symlinks:</p>
+<div class="highlight-python"><pre># replace x.y.z with latest version
+curl http://registry.npmjs.org/testacular/-/testacular-x.y.z.tgz | tar -xv &amp;&amp; mv package testacular
+
+# create symlinks (optional)
+cd testacular
+sudo ln -s $PWD/bin/testacular /usr/local/bin/testacular</pre>
+</div>
+</div>
+<div class="section" id="what-is-it-good-for">
+<h2>What is it good for?<a class="headerlink" href="#what-is-it-good-for" title="Permalink to this headline">¶</a></h2>
+<p>Mostly for testing code in multiple browsers (desktop, mobile, tablets):</p>
+<ul class="simple">
+<li>executing tests locally during development</li>
+<li>executing tests on a continuous integration server</li>
+</ul>
+</div>
+<div class="section" id="let-s-do-it">
+<h2>Let&#8217;s do it!<a class="headerlink" href="#let-s-do-it" title="Permalink to this headline">¶</a></h2>
+<p>Go into your project and create a testacular configuration. Basically you need to specify the source files that you want to execute.</p>
+<p>For an example configuration, see test/client/testacular.conf.js which
+contains most of the options.:</p>
+<div class="highlight-python"><pre># create config file (testacular.conf.js by default)
+testacular init
+
+# start server
+testacular start
+
+# open browsers you want to test (if testacular is not configured to do it for you)
+open http://localhost:8080
+
+# if you want to run tests manually (without auto watching file changes), you can:
+testacular run</pre>
+</div>
+</div>
+<div class="section" id="testing-frameworks-support">
+<h2>Testing frameworks support<a class="headerlink" href="#testing-frameworks-support" title="Permalink to this headline">¶</a></h2>
+<p>Testacular is not a testing framework, neither an assertion library, so for that you can use pretty much anything you like.</p>
+<p>However, we provide an adapter for Jasmine and Mocha.
+If you wanna write an adapter for your favourite testing framework,
+that&#8217;s great - check out adapter/jasmine.src.js and write your own.</p>
+</div>
+<div class="section" id="browsers-supported">
+<h2>Browsers Supported<a class="headerlink" href="#browsers-supported" title="Permalink to this headline">¶</a></h2>
+<p>Please see the wiki for details on supported Browsers and how to configure non-default paths.</p>
+</div>
+<div class="section" id="why-am-i-doing-this">
+<h2>Why am I doing this?<a class="headerlink" href="#why-am-i-doing-this" title="Permalink to this headline">¶</a></h2>
+<p>Throughout the development of AngularJS, we&#8217;ve been using JSTD for testing. I really think that JSTD is a great idea. Unfortunately, we had many problems with JSTD, so we decided to write our own test runner based on the same idea. We wanted a simple tool just for executing JavaScript tests that is both stable and fast. That&#8217;s why we use the awesome Socket.io library and Node.js.</p>
+</div>
+<div class="section" id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h2>
+<p>If you are thinking about making Testacular better, or you just want
+to hack on it, that&#8217;s great - fork the repo and become a contributor!:</p>
+<div class="highlight-python"><pre>git clone git://github.com/vojtajina/testacular.git # or clone your fork
+
+cd testacular
+sudo npm install . --dev # install all dev dependencies (such as grunt, jasmine-node, etc...)</pre>
+</div>
+</div>
+<div class="section" id="tips-for-contributing">
+<h2>Tips for contributing<a class="headerlink" href="#tips-for-contributing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>create a branch per feature/fix</li>
+<li>follow <a class="reference external" href="http://nodeguide.com/style.html">http://nodeguide.com/style.html</a> (with exception of 100 characters per line)</li>
+<li>send pull request requesting a merge to <tt class="docutils literal"><span class="pre">master</span></tt> branch (not to default <tt class="docutils literal"><span class="pre">stable</span></tt>)</li>
+</ul>
+<p>If you have any further questions, join the mailing
+list or submit an issue.</p>
+<p>You can follow &#64;TestacularJS as well.</p>
+</div>
+<div class="section" id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h2>
+<p>Testacular uses Semantic Versioning. All even versions (eg. <tt class="docutils literal"><span class="pre">0.2.x</span></tt>, <tt class="docutils literal"><span class="pre">0.4.x</span></tt>) are considered to
+be stable - no breaking changes, only bug fixes.</p>
+<p>Stable channel (branch &#8220;stable&#8221;):</p>
+<div class="highlight-python"><pre>npm install -g testacular</pre>
+</div>
+<p>Canary channel (branch &#8220;master&#8221;):</p>
+<div class="highlight-python"><pre>npm install -g testacular@canary</pre>
+</div>
+</div>
 </div>
 <div class="section" id="contents">
 <h1>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
@@ -72,7 +165,18 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to Testacular</a></li>
+<li><a class="reference internal" href="#">Welcome to Testacular</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#what-is-it-good-for">What is it good for?</a></li>
+<li><a class="reference internal" href="#let-s-do-it">Let&#8217;s do it!</a></li>
+<li><a class="reference internal" href="#testing-frameworks-support">Testing frameworks support</a></li>
+<li><a class="reference internal" href="#browsers-supported">Browsers Supported</a></li>
+<li><a class="reference internal" href="#why-am-i-doing-this">Why am I doing this?</a></li>
+<li><a class="reference internal" href="#development">Development</a></li>
+<li><a class="reference internal" href="#tips-for-contributing">Tips for contributing</a></li>
+<li><a class="reference internal" href="#versions">Versions</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#contents">Contents:</a><ul>
 </ul>
 </li>
