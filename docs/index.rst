@@ -14,9 +14,13 @@ Content
 =======
 .. toctree:: 
   :maxdepth: 1
+  :hidden:
   
-  installation
-  browser
+  self
+  installation  
+  browsers
+  client-server-protocol
+  events
 
 
 Overview
