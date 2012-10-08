@@ -3,42 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Testacular
-======================================
+========================
+Testacular Documentation
+========================
 
-A simple tool that allows you to execute JavaScript code in multiple *real* browsers, powered by Node.js and Socket.io.
-
-
-**The main purpose of Testacular is to make your TDD development easy, fast, and fun.**
+This is the documentation for the spectacular testacular project.
 
 
+Content
+=======
+.. toctree:: 
+  :maxdepth: 2
+  
+  installation
+  browser
 
-Installation
-#########
 
-First, you need to install Node.js. There are installers for both
-Macintosh and Windows. On Linux, we recommend using NVM.
-.. sourcecode:: bash
-
-
-  sudo npm install -g testacular
-
-or install in a local folder (you have to create symlinks to binaries
-on your own)::
-
-  npm install testacular
-
-You can install Testacular even without NPM, just get the latest
-package and create symlinks: ::
-
-.. code-block:: bash
-
-  # replace x.y.z with latest version
-  curl http://registry.npmjs.org/testacular/-/testacular-x.y.z.tgz | tar -xv && mv package testacular
-
-  # create symlinks (optional)
-  cd testacular
-  sudo ln -s $PWD/bin/testacular /usr/local/bin/testacular
+Overview
+========
 
 What is it good for?
 ###############
@@ -54,7 +36,9 @@ Let's do it!
 Go into your project and create a testacular configuration. Basically you need to specify the source files that you want to execute.
 
 For an example configuration, see test/client/testacular.conf.js which
-contains most of the options.::
+contains most of the options.
+
+.. code-block:: bash
 
   # create config file (testacular.conf.js by default)
   testacular init
@@ -80,19 +64,21 @@ that's great - check out adapter/jasmine.src.js and write your own.
 Browsers Supported
 ###############
 
-Please see the wiki for details on supported Browsers and how to configure non-default paths.
+Please see :doc:`browser` for details on supported Browsers and how to configure non-default paths.
 
 Why am I doing this?
 ################
 
-Throughout the development of AngularJS, we've been using JSTD for testing. I really think that JSTD is a great idea. Unfortunately, we had many problems with JSTD, so we decided to write our own test runner based on the same idea. We wanted a simple tool just for executing JavaScript tests that is both stable and fast. That's why we use the awesome Socket.io library and Node.js.
+Throughout the development of AngularJS, we've been using JSTD for testing. I really think that JSTD is a great idea. Unfortunately, we had many problems with JSTD, so we decided to write our own test runner based on the same idea. We wanted a simple tool just for executing JavaScript tests that is both stable and fast. That's why we use the awesome Socket.io library and `Node.js`_.
 
 
 Development
 ##########
 
 If you are thinking about making Testacular better, or you just want
-to hack on it, that's great - fork the repo and become a contributor!::
+to hack on it, that's great - fork the repo and become a contributor!
+
+.. code-block:: bash
 
   git clone git://github.com/vojtajina/testacular.git # or clone your fork
 
@@ -120,28 +106,16 @@ Versions
 Testacular uses Semantic Versioning. All even versions (eg. ``0.2.x``, ``0.4.x``) are considered to
 be stable - no breaking changes, only bug fixes.
 
-Stable channel (branch "stable")::
+Stable channel (branch "stable")
+
+.. code-block:: bash
 
   npm install -g testacular
 
-Canary channel (branch "master")::
+Canary channel (branch "master")
+
+.. code-block:: bash
 
   npm install -g testacular@canary
 
-
-
-Contents:
-======
-.. toctree::
-   :maxdepth: 2
-
- 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+.. _Node.js: http://nodejs.org
