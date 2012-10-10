@@ -100,6 +100,11 @@
 
     // Enable dropdown.
     $('.dropdown-toggle').dropdown();
+
+    // Patch warning notes
+    $('.warning').each(function () {
+      $(this).addClass('alert').addClass('alert-block');
+    });
   });
 }());
 </script>
