@@ -5,16 +5,19 @@ Contributing
 Getting the code
 ##############
 
-Clone the repository from git via, change into the new directory and install the dependencies.
+If you are thinking about making Testacular better, or you just want
+to hack on it, that's great - `fork the repo`_ and become `a contributor`_!
 
 .. code-block:: bash
   
-  $ git clone https://github.com/vojtajina/testacular.git
+  $ git clone git://github.com/vojtajina/testacular.git # or clone your fork
   $ cd testacular
+
+  # Install development dependencies
   $ npm install
 
-  # Run the tests with grunt
-  $ grunt 
+  # Run the tests with grunt 
+  $ node_modules/.bin/grunt 
 
 Now go and code awesome stuff. I'll wait until you're finished.
 
@@ -33,3 +36,5 @@ Guidelines
   Don't send the pull request to the default branch ``stable``.
 
 
+.. _fork the repo: https://github.com/vojtajina/testacular/fork_select
+.. _a contributor: https://github.com/vojtajina/testacular/graphs/contributors

@@ -3,19 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. toctree:: 
-  :maxdepth: 1
-  :hidden:
-
-  self
-  user
-  developer
 
 
 Testacular Documentation
 ========================
 
 This is the documentation for the spectacular testacular project.
+
+
+Content
+#######
+
+.. toctree:: 
+  :maxdepth: 2
+
+
+  self
+  user
+  developer
+
 
 
 What is it good for?
@@ -68,19 +74,6 @@ Why am I doing this?
 Throughout the development of `AngularJS`_, we've been using `JSTD`_ for testing. I really think that JSTD is a great idea. Unfortunately, we had many problems with JSTD, so we decided to write our own test runner based on the same idea. We wanted a simple tool just for executing JavaScript tests that is both stable and fast. That's why we use the awesome Socket.io`_ library and `Node.js`_.
 
 
-Development
-##########
-
-If you are thinking about making Testacular better, or you just want
-to hack on it, that's great - `fork the repo`_ and become `a contributor`_!
-
-.. code-block:: bash
-
-  git clone git://github.com/vojtajina/testacular.git # or clone your fork
-
-  cd testacular
-  sudo npm install . --dev # install all dev dependencies (such as grunt, jasmine-node, etc...)
-
 
 Contact
 #################
@@ -113,8 +106,6 @@ Canary channel (branch "master")
 .. _Grunt: http://gruntjs.com/
 .. _Jasmine: http://pivotal.github.com/jasmine/
 .. _Mocha: http://visionmedia.github.com/mocha/
-.. _fork the repo: https://github.com/vojtajina/testacular/fork_select
-.. _a contributor: https://github.com/vojtajina/testacular/graphs/contributors
 .. _Semantic Versioning: http://semver.org/
 .. _test/client/testacular.conf.js: https://github.com/vojtajina/testacular/blob/master/test/client/testacular.conf.js
 .. _@TestacularJS: http://twitter.com/TestacularJS
