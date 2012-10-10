@@ -61,7 +61,7 @@ Testacular is not a testing framework, neither an assertion library, so for that
 
 However, we provide an adapter for Jasmine and Mocha.
 If you wanna write an adapter for your favourite testing framework,
-that's great - check out adapter/jasmine.src.js and write your own. 
+that's great - check out `adapter/jasmine.src.js`_ and write your own. 
 
 Browsers Supported
 ###############
@@ -71,7 +71,7 @@ Please see :doc:`user/browsers` for details on supported Browsers and how to con
 Why am I doing this?
 ################
 
-Throughout the development of `AngularJS`_, we've been using `JSTD`_ for testing. I really think that JSTD is a great idea. Unfortunately, we had many problems with JSTD, so we decided to write our own test runner based on the same idea. We wanted a simple tool just for executing JavaScript tests that is both stable and fast. That's why we use the awesome Socket.io`_ library and `Node.js`_.
+Throughout the development of `AngularJS`_, we've been using `JSTD`_ for testing. I really think that JSTD is a great idea. Unfortunately, we had many problems with JSTD, so we decided to write our own test runner based on the same idea. We wanted a simple tool just for executing JavaScript tests that is both stable and fast. That's why we use the awesome `Socket.io`_ library and `Node.js`_.
 
 
 
@@ -108,6 +108,7 @@ Canary channel (branch "master")
 .. _Mocha: http://visionmedia.github.com/mocha/
 .. _Semantic Versioning: http://semver.org/
 .. _test/client/testacular.conf.js: https://github.com/vojtajina/testacular/blob/master/test/client/testacular.conf.js
+.. _adapter/jasmine.src.js: https://github.com/vojtajina/testacular/blob/master/adapter/jasmine.src.js
 .. _@TestacularJS: http://twitter.com/TestacularJS
 .. _mailing list: https://groups.google.com/forum/#!forum/testacular
 .. _issuetracker: https://github.com/vojtajina/testacular/issues
