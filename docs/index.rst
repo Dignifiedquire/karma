@@ -82,17 +82,9 @@ to hack on it, that's great - `fork the repo`_ and become `a contributor`_!
   sudo npm install . --dev # install all dev dependencies (such as grunt, jasmine-node, etc...)
 
 
-Tips for contributing
+Contact
 #################
-
-* create a branch per feature/fix
-* follow http://nodeguide.com/style.html (with exception of 100 characters per line)
-* send pull request requesting a merge to ``master`` branch (not to default ``stable``)
-
-
-If you have any further questions, join the `mailing list`_ or submit an `issue`_.
-
-You can follow `@TestacularJS`_ as well.
+There is a `mailing list`_ and an `issuetracker`_.  Also you can follow `@TestacularJS`_ as well.
 
 
 Versions
@@ -127,4 +119,4 @@ Canary channel (branch "master")
 .. _test/client/testacular.conf.js: https://github.com/vojtajina/testacular/blob/master/test/client/testacular.conf.js
 .. _@TestacularJS: http://twitter.com/TestacularJS
 .. _mailing list: https://groups.google.com/forum/#!forum/testacular
-.. _issue: https://github.com/vojtajina/testacular/issues/new
+.. _issuetracker: https://github.com/vojtajina/testacular/issues
