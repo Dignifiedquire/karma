@@ -7,7 +7,7 @@ describe 'reporter', ->
 
   beforeEach ->
     growlSpy = jasmine.createSpy global, 'growl'
-    m = loadFile __dirname + '/../../../lib/reporters/Growl.js', { growl: growlSpy}
+    m = loadFile __dirname + '/../../../lib/reporters/Growl.js'#, { growl: growlSpy}
 
   describe 'Growl', ->
     reporter = null

@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       var processToKill;
       var cmd = './bin/testacular';
       var args = [
-        'start', null, '--single-run', '--no-auto-watch', '--reporters=dots', '--browsers=' + BROWSERS
+        'start', null, '--single-run', '--no-auto-watch', '--reporters=growl', '--browsers=' + BROWSERS
       ];
 
       var next = function(err, result, code) {
