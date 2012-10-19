@@ -45,7 +45,7 @@
   "devDependencies": {
     "jasmine-node": ">= 1.0.11",
     "mocks": ">= 0.0.5",
-    "grunt": ">= 0.3.11",
+    "grunt": "~0.4.0a",
     "which": ">= 1.0.5"
   },
   "preferGlobal": true,

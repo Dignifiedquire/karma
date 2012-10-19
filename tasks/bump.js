@@ -41,7 +41,7 @@ module.exports = function(grunt) {
     var PKG_FILE = 'package.json';
     var pkg = grunt.file.readJSON(PKG_FILE);
     var previousVersion = pkg.version;
-    var newVersion = pkg.version = grunt.helper('bump_version', previousVersion, type);
+    var newVersion = pkg.version = bump_version(previousVersion, type);
 
     // write updated package.json
     grunt.file.write(PKG_FILE, JSON.stringify(pkg, null, '  '));
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 
   // TODO(vojta): update grunt.config('pkg') as well,
   // currently running grunt bump xxx (xxx still see old version)
-  grunt.registerHelper('bump_version', function(version, versionType) {
+  var bump_version = function(version, versionType) {
     var type = {
       patch: 2,
       minor: 1,
@@ -78,5 +78,5 @@ module.exports = function(grunt) {
       parts[idx] = 0;
     }
     return parts.join('.');
-  });
+  };
 };
