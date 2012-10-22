@@ -4,14 +4,11 @@ client = bs.createClient
   username: 'dignifiedquire@gmail.com'
   password: 'mylife33'
 
-# client.getBrowsers (err, browsers) ->
-#   console.log err if err
-#   for browser in browsers
-#     if browser.browser
-#       console.log "#{browser.os}: #{browser.browser}"
-#     else
-#       console.log "#{browser.os}: #{browser.device}"
+browsers = {}
 
+client.getBrowsers (err, browsers) ->
+  console.log err if err
+  console.log JSON.stringify browsers
 
 
 

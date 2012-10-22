@@ -51,7 +51,8 @@
     "rimraf": ">= 2.0.2",
     "q": ">= 0.8.9",
     "LiveScript": ">= 1.0.1",
-    "colors": "~0.6.0-1"
+    "colors": "~0.6.0-1",
+    "browserstack": "~0.1.0"
   },
   "devDependencies": {
     "grunt-jasmine-node": "https://github.com/Dignifiedquire/grunt-jasmine-node/tarball/grunt-0.4",
