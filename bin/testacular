@@ -1,28 +1,91 @@
 #!/usr/bin/env node
 
+/*
+ * Require External Dependencies
+ */
 var path = require('path');
 var fs = require('fs');
+var program = require('commander');
 
-// Try to find a local install
-var dir = path.resolve(process.cwd(), 'node_modules', 'testacular', 'lib');
+var constants = requireLocal('lib/constants');
 
-// Check if the local install exists else we use the install we are in
-if (!fs.existsSync(dir)) {
-  dir = path.join('..', 'lib');
-}
+/*
+ * Requires a given file relative to the cwd. Otherwise
+ * it requires it from ../lib/
+ *
+ * Usage: requireLocal(module)
+ */
+var requireLocal = function(module) {
+  // Try to find a local install
+  var dir = path.resolve(process.cwd(), 'node_modules', 'testacular', module);
 
-var cli = require(path.join(dir, 'cli'));
+  // Check if the local install exists else we use the install we are in
+  if (!fs.existsSync(dir)) {
+    dir = path.join('..', module);
+  }
+  return require(dir);
+};
 
-var config = cli.process();
 
-switch (config.cmd) {
-  case 'start':
-    require(path.join(dir, 'server')).start(config, process.exit);
-    break;
-  case 'run':
-    require(path.join(dir, 'runner')).run(config, process.exit);
-    break;
-  case 'init':
-    require(path.join(dir, 'init')).init(config);
-    break;
-}
+/*
+ * Coercion Functions
+ */
+
+var list = function(val) {
+  return val.split(',');
+};
+
+var logLevel = function(level) {
+  level = level || 'error';
+  return constants['LOG_' + level.toUpperCase()];
+};
+
+/*
+ * Setup Commander
+ */
+
+program
+  .version(constants.VERSION);
+
+
+program
+  .command('start [configFile]')
+  .description('Start the server/do single run.')
+  .option('--port <integer>', 'Port where the web server is running.', parseInt)
+  .option('--runner-port <integer>', 'Port where the server is listening for runner.', parseInt)
+  .option('--auto-watch', 'Auto watch source files and run on change.')
+  .option('--log-level <level>', '<disable | error | warn | info | debug> Level of logging.', logLevel)
+  .option('--no-colors', 'Do not use colors when reporting or printing logs.')
+  .option('--reporters <reporters ...>', 'List of reporters (available: dots, progress, junit).', list)
+  .option('--browsers <browsers ...>', 'List of browsers to start (eg. --browsers Chrome,ChromeCanary,Firefox).', list)
+  .option('--capture-timeout <integer>', 'Kill browser if does not capture in given time [ms].', parseInt)
+  .option('--single-run', 'Run the test when browsers captured and exit.')
+  .option('--report-slower-than <integer>', 'Report tests that are slower than given time [ms].', parseInt)
+  .action(function(configFile, options){
+    options.configFile = configFile;
+    console.log(options.logLevel);
+    requireLocal('lib/server').start(options, process.exit);
+  });
+  
+
+
+program
+  .command('run')
+  .description('Trigger a test run.')
+  .option('--runner-port <integer>', parseInt)
+  .action(function(options){
+    requireLocal('lib/runner').run(options, process.exit);
+  });
+
+program
+  .command('init')
+  .description('Initialize a config file.')
+  .option('--log-level <level>', '<disable | error | warn | info | debug> Level of logging.', 'error')
+  .option('--no-colors', 'Do not use colors when reporting or printing logs.')
+  .action(function(options){
+    requireLocal('lib/server').init(options);
+  });
+
+
+// Parse Arguments
+program.parse(process.argv);

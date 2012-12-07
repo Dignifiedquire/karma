@@ -45,7 +45,7 @@ module.exports = function(grunt) {
       var tests = grunt.file.expand(this.data);
       var processToKill;
       var args = [
-        'start', null, '--single-run', '--no-auto-watch', '--reporters=dots', '--browsers=' + BROWSERS
+        'start', null, '--single-run', '--reporters=dots', '--browsers=' + BROWSERS
       ];
 
       var next = function(err, result, code) {
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
 
     // CLIENT unit tests
     else if (this.target === 'client') {
-      exec(['start', this.data, '--single-run', '--no-auto-watch', '--reporters=dots',
+      exec(['start', this.data, '--single-run', '--reporters=dots',
           '--browsers=' + BROWSERS], 'Client unit tests failed.');
     }
   });
