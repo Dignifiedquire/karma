@@ -1,0 +1,39 @@
+{
+  "locals": {
+    "title": "Testacular",
+    "googleanalytics": "UA-XXXXXXXXX-X",
+    "mixpanel": "",
+    "ghuser": "vojtajina",
+    "ghbaseurl": "",
+    "ghproject": "testacular",
+    "tweeturl": "http://vojtajina.github.com/vojtajina",
+    "tweetvia": "TestacularJS",
+    "tweetrelated": "TestacularJS",
+    "twitterfollow": "TestacularJS",
+    "version": "0.6.0",
+    "hasdownloads": false,
+    "description": "A simple tool that allows you to execute JavaScript code in multiple real browsers, powered by Node.js and Socket.io."
+  },
+  "plugins": [
+    { "name": "code"
+    , "files": [
+          { "name": "server"
+          , "title": "the server"
+          , "file": "../../lib/server.js"
+          , "description": "This is the description of the server." },
+          { "name": "runner"
+          , "title": "the runner"
+          , "file": "../../lib/runner.js"
+          , "description": "This is the description of the runner." },
+          { "name": "init"
+          , "title": "initialize"
+          , "file": "../../lib/init.js"
+          , "description": "This is the description of initalize." },
+          { "name": "web-server"
+          , "title": "the web-server"
+          , "file": "../../lib/web-server.js"
+          , "description": "This is the description of the web-server." }
+      ]
+    }
+  ]
+}
