@@ -1,5 +1,3 @@
-section: intro
-
 # Configuration
 In order to serve you well, Testacular needs to know about your project. That's done through a configuration file.
 

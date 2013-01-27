@@ -1,5 +1,3 @@
-section: config
-
 # Preprocessors
 
 Preprocessors in Testacular allow you to do some work with your files before

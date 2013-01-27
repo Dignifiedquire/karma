@@ -1,5 +1,3 @@
-section: dev
-
 # Public API
 
 Most of the time, you will be using Testacular directly from the command line.

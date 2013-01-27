@@ -1,6 +1,6 @@
 - var sections = ['intro', 'config', 'plus', 'dev', 'about'];
 
-mixin navigation(currentSection)
+mixin navigation(currentSection, version)
   for section in sections
     li
       - var active = section === currentSection ? 'active' : '';
@@ -9,7 +9,7 @@ mixin navigation(currentSection)
         each heading in fileList[section]
           unless heading.name == section
             li
-              a(href='#{heading.link}')
+              a(href='/public/#{version}/#{heading.link}')
                 = heading.name.replace(/_/g, ' ')
 
 mixin versionDropdown(versions, active)
@@ -18,13 +18,4 @@ mixin versionDropdown(versions, active)
     ul
       each version in versions
         li
-          a(href='../#{version}/index.html')= 'v' + version
-
-
-mixin sidebar(toh)
-  ul.square-list.categories.bottom
-    for heading in toh
-      if heading.rank === 2
-        li
-          a(href='#{heading.link}')
-            != markdown(heading.name.replace(/_/g, ' ')).html
+          a(href='/public/#{version}/index.html')= 'v' + version

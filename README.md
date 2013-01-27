@@ -54,7 +54,7 @@ variables:
 * `mtime` indicates the last modified time of your source file
 * `markdown` references the Markdown converter; since this is based on namp, you'll want to add `.html` at the end to get the actual HTML
 
-### provided buy `tasks/pandadoc.js`
+### provided buy `taks/docs.js`
 
 * `versions` is a list of all available versions as found in `src`.
 * `currentVersion` is the current version that is being built.

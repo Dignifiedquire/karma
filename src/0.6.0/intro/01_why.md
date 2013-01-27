@@ -1,5 +1,3 @@
-section: intro
-
 # Why?
 
 ## Why should I use Testacular?

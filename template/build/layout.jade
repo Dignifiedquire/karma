@@ -15,7 +15,7 @@ include html
           .two-thirds.column
             nav#menu.navigation
               ul#nav
-                mixin navigation(metadata.section)
+                mixin navigation(metadata.section, currentVersion)
                 mixin versionDropdown(versions, currentVersion)
           .sixteen.columns
             hr

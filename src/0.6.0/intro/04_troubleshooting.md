@@ -1,5 +1,3 @@
-section: intro
-
 # Troubleshooting
 
 You have some problems? Look no further. Known problems and solutions are collected here so you don't have to figure them out again and again.

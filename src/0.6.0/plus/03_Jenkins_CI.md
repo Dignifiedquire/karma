@@ -1,5 +1,3 @@
-section: plus
-
 # Jenkins CI Integration
 
 [Jenkins CI] is one of the most popular continuous integration servers

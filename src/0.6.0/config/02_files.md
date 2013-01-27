@@ -1,5 +1,3 @@
-section: config
-
 # Files
 
 The files array determines wich files are loaded, watched and served by Testacular.

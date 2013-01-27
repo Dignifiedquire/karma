@@ -1,5 +1,3 @@
-section: plus
-
 # Travis CI Integration
 
 [Travis CI] is a popular continuous integration service that integrates with your [Github] repository to automatically run your tests when code is pushed. Integration is done by adding a simple [YAML] file to your project root; Travis and Github take care of the rest. Travis results will appear in your Github pull requests and your history is available on their control panel. This article assumes you already have Travis account.

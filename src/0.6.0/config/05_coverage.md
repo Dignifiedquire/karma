@@ -1,5 +1,3 @@
-section: config
-
 # Coverage Reporter
 
 If you want to use the code coverage feature of testacular you need to

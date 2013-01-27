@@ -1,5 +1,3 @@
-section: about 
-
 # Versioning
 
 Testacular uses [Semantic Versioning].

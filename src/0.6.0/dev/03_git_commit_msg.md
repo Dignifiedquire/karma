@@ -1,5 +1,3 @@
-section: dev
-
 # Git Commit Message Convention
 
 Format of the commit message:
