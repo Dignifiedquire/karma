@@ -5,17 +5,22 @@
  * Licensed under the MIT license.
  */
 
+// Dependencies
+var wrench = require('wrench');
+var semver = require('semver');
+var path = require('path');
+var fs = require('q-io/fs');
+var q = require('q');
+var _ = require('lodash');
+
+var sep = require('os').platform() === 'win32' ? '\\' : '/';
+var pandaDocs = require('panda-docs');
+
+
+
+
+// Grunt Task
 module.exports = function(grunt) {
-
-  var wrench = require('wrench');
-  var semver = require('semver');
-  var path = require('path');
-  var fs = require('q-io/fs');
-  var q = require('q');
-
-  var sep = require('os').platform() === 'win32' ? '\\' : '/';
-  var panda = require('panda-docs');
-
 
   // Handle errors
   var errorHandler = function(error) {
@@ -63,20 +68,32 @@ module.exports = function(grunt) {
           if (key.indexOf('.md') > -1) return;
           list[key] = [];
         } else {
-          var name = dir.shift().replace(/\.md$/, '');
+          var srcName = dir.shift().replace(/\.md$/, '');
+          var name = srcName.replace(/^\d*_/, '');
           var obj = {
-            name: name.replace(/^\d*_/, ''),
-            link: path.join(name + '.html')
+            name: name,
+            srcName: path.join(srcName + '.html'),
+            link: path.join(key, name + '.html')
           };
-          // The first one should be the one with the same name as the category
-          if (name === key) {
-            return list[key].unshift(obj);
-          }
+
           list[key].push(obj);
         }
       });
       return list;
     });
+  };
+
+  var panda = function(srcArray, buildOptions) {
+    var deferred = q.defer();
+
+    pandaDocs.make(srcArray, buildOptions, function(error, filesObject) {
+      if (error) {
+        deferred.reject(error);
+      }
+      deferred.resolve(filesObject.files);
+    });
+    return deferred.promise;
+
   };
 
   // Generate docs for one specific version
@@ -110,15 +127,19 @@ module.exports = function(grunt) {
       grunt.log.ok('Building version ' + version);
       buildOptions.fileList = fileList;
 
-      var deferred = q.defer();
+      return panda(srcArray, buildOptions).then(function(files) {
 
-      panda.make(srcArray, buildOptions, function(error, filesObject) {
-        if (error) {
-          deferred.reject(error);
-        }
-        deferred.resolve(filesObject.files);
+        // Copy the files into the new structure
+        return q.all(_.map(fileList, function(list, category) {
+          return fs.makeDirectory(path.join(outPath, category)).then(function() {
+            return q.all(list.map(function(file) {
+              var src = path.join(outPath, file.srcName);
+              var target = path.join(outPath, file.link);
+              return fs.move(src, target);
+            }));
+          });
+        }));
       });
-      return deferred.promise;
 
     }).fail(errorHandler);
 
@@ -126,7 +147,7 @@ module.exports = function(grunt) {
 
 
   // The Task itself
-  grunt.registerMultiTask('pandadocs', 'Generate docs using panda-docs.', function() {
+  grunt.registerMultiTask('docs', 'Generate docs using panda-docs.', function() {
     // This is an async task.
     var done = this.async();
 

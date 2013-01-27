@@ -2,6 +2,12 @@ module.exports = (grunt) ->
 
   # Project configuration.
   grunt.initConfig
+    connect:
+      server:
+        options:
+          port: 9000
+          base: '.'
+          keepalive: true
     less:
       docs:
         files:
@@ -23,7 +29,7 @@ module.exports = (grunt) ->
       docs:
         files:
           'template/build/assets/css/app.css': 'template/build/assets/css/app.css'
-    pandadocs:
+    docs:
       options:
         title: 'Testacular'
         assets: './template/build/assets'
@@ -39,7 +45,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-mincss'
-        
+  grunt.loadNpmTasks 'grunt-contrib-connect'
+                
   grunt.registerTask 'build', ['less', 'mincss', 'uglify']
-  grunt.registerTask 'docs', ['pandadocs']
-  grunt.registerTask 'default', ['build', 'docs']
+  grunt.registerTask 'server', ['connect']
+  grunt.registerTask 'default', ['build', 'docs', 'server']
