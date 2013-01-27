@@ -6,7 +6,6 @@ module.exports = (grunt) ->
       server:
         options:
           port: 9000
-          base: '.'
           keepalive: true
     less:
       docs:

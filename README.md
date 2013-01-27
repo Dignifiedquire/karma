@@ -17,6 +17,23 @@ Run build
 $ grunt
 ```
 
+## Grunt Tasks
+
+### docs
+This task is the heart of all the operations. The source is under
+`tasks/docs.js` and it generates all the docs using [panda-docs].
+
+### server
+Start a development server under `localhost:9000` using [grunt-contrib-connect].
+
+### build
+Builds the templates using the following tasks
+
+* `less`: Compile all less files from `template/src/less` to css
+  files in `templates/build/assets/css/app.css`.
+* `mincss`: Minify the just compiled `app.css` file.
+* `uglify`: Minify all needed js files from `template/src/js/` into
+  `template/build/assets/js/app.js`.
 
 
 ## Templates
@@ -46,3 +63,4 @@ variables:
 
 [grunt-cli]: https://github.com/gruntjs/grunt-cli
 [panda-docs]: https://github.com/gjtorikian/panda-docs
+[grunt-contrib-connect]: https://github.com/gruntjs/grunt-contrib-connect
