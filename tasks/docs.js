@@ -1,26 +1,20 @@
-/*
- * grunt-pandadocs
- *
- * Copyright (c) 2013 Friedel Ziegelmayer
- * Licensed under the MIT license.
- */
+// Grunt Task for Generating the awesome docs at testacular.github.com
+
 
 // Dependencies
-var wrench = require('wrench');
 var semver = require('semver');
 var path = require('path');
 var fs = require('q-io/fs');
 var q = require('q');
-var _ = require('lodash');
 
 var sep = require('os').platform() === 'win32' ? '\\' : '/';
 var pandaDocs = require('panda-docs');
 
 
 
-
-// Grunt Task
+// Main Function
 module.exports = function(grunt) {
+  var _ = grunt.util._;
 
   // Handle errors
   var errorHandler = function(error) {
@@ -45,6 +39,7 @@ module.exports = function(grunt) {
 
   };
 
+  // Generate a list of source files
   var getFileList = function(srcPath, outPath) {
     // Only add directories and markdown files
     var guard = function(p, stat) {
@@ -83,6 +78,7 @@ module.exports = function(grunt) {
     });
   };
 
+  // Generate documentation using panda
   var panda = function(srcArray, buildOptions) {
     var deferred = q.defer();
 
@@ -96,7 +92,7 @@ module.exports = function(grunt) {
 
   };
 
-  // Generate docs for one specific version
+  // Generate documentation for one specific version
   var docsForVersion = function(version, options) {
     var srcPath = path.join(options.source, version);
     var outPath = path.join(options.output, version);
@@ -111,15 +107,12 @@ module.exports = function(grunt) {
     ];
 
     var basePath = path.join(__dirname, '..');
-    var sharedFiles = [
-      {src: 'CONTRIBUTING', dest: 'dev/01_contributing'}
-    ];
 
     // Copy the shared data to the folder of this version
-    return q.all(sharedFiles.map(function(file) {
+    return q.all(_.map(options.copy, function(dest, src){
       grunt.log.ok('Copying shared files...');
-      var src = path.join(basePath, file.src + '.md' );
-      var dest = path.join(srcPath, file.dest + '.md');
+      var src = path.join(basePath, src + '.md' );
+      var dest = path.join(srcPath, dest + '.md');
       return fs.copy(src, dest);
     })).then(function() {
       return getFileList(srcPath, outPath);
@@ -152,15 +145,25 @@ module.exports = function(grunt) {
     var done = this.async();
 
     // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options();
-
+    var options = this.options({
+      title: 'Testacular',
+      disableTests: true,
+      assets: 'template/build/assets',
+      skin: 'template/build'
+    });
+    
     var sourceFolders = this.filesSrc;
-    q.all(sourceFolders.map(function(folder) {
+
+    q.all(this.files.map(function(mapping) {
+      var folder = mapping.src[0];
+      
       return getVersions(folder).then(function(versions) {
         // Add additional information to the options object to be passed
         // into docsForVersion
         options.source = folder;
         options.versions = versions;
+        options.output = mapping.dest;
+        options.outputAssets = path.join(mapping.dest, 'assets');
 
         return q.all(versions.map(function(version) {
           return docsForVersion(version, options);

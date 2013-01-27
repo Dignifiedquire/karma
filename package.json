@@ -12,8 +12,8 @@
     "panda-docs": "https://github.com/Dignifiedquire/panda-docs/tarball/templates",
     "grunt-contrib-uglify": "~0.1.1rc6",
     "grunt-contrib-mincss": "https://github.com/gruntjs/grunt-contrib-mincss/tarball/master",
-    "lodash": "~0.9.1",
-    "grunt-contrib-connect": "~0.1.0"
+    "grunt-contrib-connect": "~0.1.0",
+    "semver": "~1.1.2"
   },
   "scripts": {
     "test": ""

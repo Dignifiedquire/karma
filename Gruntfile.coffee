@@ -30,13 +30,13 @@ module.exports = (grunt) ->
           'template/build/assets/css/app.css': 'template/build/assets/css/app.css'
     docs:
       options:
-        title: 'Testacular'
-        assets: './template/build/assets'
-        output: './public'
-        outputAssets: './public/assets'
-        disableTests: true
-        skin: './template/build'
-      docs: ['src']
+        copy:
+          'CONTRIBUTING': 'dev/01_contributing'
+        
+      docs:
+        files:
+          'public': 'src'
+
           
           
   

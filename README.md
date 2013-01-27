@@ -23,6 +23,31 @@ $ grunt
 This task is the heart of all the operations. The source is under
 `tasks/docs.js` and it generates all the docs using [panda-docs].
 
+#### `files`
+This option defines where the source documents are and where the
+output folder is.
+
+Example:
+```javascript
+files = {
+  'public': 'src'
+}
+```
+#### Options 
+##### `copy`
+This is a list of markdown files that gets copied into the source directory
+before generating the documentation
+
+Example:
+```javascript
+copy = {
+  'CONTRIBUTING': 'dev/01_contributing'
+}
+```
+
+##### Panda-Docs Options
+All the panda-docs options can be set to override the defaults.
+
 ### server
 Start a development server under `localhost:9000` using [grunt-contrib-connect].
 
