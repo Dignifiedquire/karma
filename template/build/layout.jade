@@ -29,9 +29,10 @@ include html
           .page-columns
             #markdown.sixteen.columns.bottom
               != content
-      footer
-        .container
-          include footer
+      .push
+    footer
+      .container
+        include footer
 
-    // Placed at the end of the document so the pages load faster 
-    include scripts
+  // Placed at the end of the document so the pages load faster 
+  include scripts
