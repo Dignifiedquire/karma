@@ -1,6 +1,3 @@
----
-title: Testacular
----
 <!DOCTYPE html><!--[if lt IE 7]>
 <html lang="en" class="ie ie6"></html><![endif]--><!--[if IE 7]>
 <html lang="en" class="ie ie7"></html><![endif]--><!--[if IE 8]>
@@ -12,7 +9,7 @@ title: Testacular
   <!-- This this the template for the head part.-->
   <!-- Basic Page Needs-->
   <meta charset="utf-8">
-  <title>{{page.title}}</title>
+  <title>AngularJS</title>
   <!-- Mobile specific Metas-->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="">
@@ -36,15 +33,49 @@ title: Testacular
         </div>
         <div class="two-thirds column">
           <nav id="menu" class="navigation">
-            <ul id="nav">{% for category in site.categories %}
-              <li><a href="javascript:void">{{category[0]}}</a>
-                <ul>{% for post in category[1] %}
-                  <li><a href="{{post.url}}">{{post.title}}</a></li>{% endfor %}
+            <ul id="nav">
+              <li><a href="javascript:void">about</a>
+                <ul>
+                  <li><a href="/about/changelog.html">Changelog</a></li>
+                  <li><a href="/about/versioning.html">Versioning</a></li>
                 </ul>
-              </li>{% endfor %} 
-              <li><a href="">{{page.tags}}</a>
-                <ul>{% for tag in site.tags %}
-                  <li> <a href="">{{ tag[0] }}</a></li>{% endfor %}
+              </li>
+              <li><a href="javascript:void">dev</a>
+                <ul>
+                  <li><a href="/dev/msg.html">Git Commit Message Convention</a></li>
+                  <li><a href="/dev/contributing.html">How to contribute</a></li>
+                  <li><a href="/dev/API.html">Public API</a></li>
+                </ul>
+              </li>
+              <li><a href="javascript:void">plus</a>
+                <ul>
+                  <li><a href="/plus/Teamcity.html">Teamcity</a></li>
+                  <li><a href="/plus/RequireJS.html">RequireJS</a></li>
+                  <li><a href="/plus/Cloud9.html">Cloud9 IDE Integration</a></li>
+                  <li><a href="/plus/CI.html">Jenkins CI Integration</a></li>
+                  <li><a href="/plus/AngularJS.html">AngularJS</a></li>
+                </ul>
+              </li>
+              <li><a href="javascript:void">config</a>
+                <ul>
+                  <li><a href="/config/preprocessors.html">Preprocessors</a></li>
+                  <li><a href="/config/files.html">Files</a></li>
+                  <li><a href="/config/file.html">Configuration File</a></li>
+                  <li><a href="/config/coverage.html">Coverage Reporter</a></li>
+                  <li><a href="/config/browsers.html">Browsers</a></li>
+                </ul>
+              </li>
+              <li><a href="javascript:void">intro</a>
+                <ul>
+                  <li><a href="/intro/why.html">Why?</a></li>
+                  <li><a href="/intro/troubleshooting.html">Troubleshooting</a></li>
+                  <li><a href="/intro/installation.html">Installation</a></li>
+                  <li><a href="/intro/configuration.html">Configuration</a></li>
+                </ul>
+              </li> 
+              <li><a href="">0.6.0</a>
+                <ul>
+                  <li> <a href="">0.6.0</a></li>
                 </ul>
               </li>
             </ul>
@@ -56,36 +87,12 @@ title: Testacular
       </div>
     </header>
     <div class="container clearfix">
-      <div id="welcome" class="sixteen columns">
-        <div class="qoute">
-          <div class="ten-and-half columns omega">
-            <h2>Spectacular Test Runner for JavaScript</h2>
-            <blockquote>On the&nbsp;<a href="http://www.angularjs.org/">AngularJS</a>&nbsp;team, we rely on testing and we always
-              seek for better tools that would make our life easier.
-              That's why we created Testacular - a test runner that fits
-              all our needs.
-            </blockquote>
-          </div>
-          <div class="four-and-half columns alpha"><a href="https://github.com/testacular/testacular" class="btn-github link"><i class="icon-github-alt"></i>&nbsp; View project on GitHub</a><a href="https://npmjs.org/package/testacular" class="btn-npm link"><i class="icon-hdd"></i>&nbsp; npm install -g testacular</a></div>
-        </div>
+      <div class="sixteen columns">
+        <h1 class="page-title">AngularJS<span class="line"></span></h1>
       </div>
-    </div>
-    <div id="slider">
-      <div class="container clearfix">
-        <div class="sixteen columns">
-          <div class="flex-container">
-            <div class="flexslider">
-              <ul class="slides">
-                <li><a href="http://www.youtube.com/watch?v=MVw8N3hTfCI"><img src="images/img/screencast.png" alt="Screencast"></a>
-                  <p class="flex-caption"><span>Introductory Screencast </span>The spectacular quick start to Testacular.</p>
-                </li>
-                <li><a href="http://www.youtube.com/watch?v=5mHjJ4xf_K0"><img src="images/img/jseverywhere.png" alt="JS.everywhere 2012"></a>
-                  <p class="flex-caption"><span>JS Everywhere 2012 Europe</span>Watch Vojta Jína presenting Testacular at JS.everywhere.</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="page-columns">
+        <div id="markdown" class="sixteen columns bottom"><h1 id="toc_0">AngularJS</h1>
+</div>
       </div>
     </div>
     <div class="push"></div>

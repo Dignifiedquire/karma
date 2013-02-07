@@ -1,0 +1,201 @@
+<!DOCTYPE html><!--[if lt IE 7]>
+<html lang="en" class="ie ie6"></html><![endif]--><!--[if IE 7]>
+<html lang="en" class="ie ie7"></html><![endif]--><!--[if IE 8]>
+<html lang="en" class="ie ie8"></html><![endif]--><!--[if (gte IE 9)|!(IE)]>
+<html lang="en"></html>
+<head>
+  <!-- head.jade -->
+  <!---->
+  <!-- This this the template for the head part.-->
+  <!-- Basic Page Needs-->
+  <meta charset="utf-8">
+  <title>Files</title>
+  <!-- Mobile specific Metas-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Le styles -->
+  <link href="/css/app.css" rel="stylesheet">
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements --><!--[if lt IE 9]>
+  <script src="/js/html5.js"></script><![endif]-->
+  <!-- Fav and touch icons -->
+  <link rel="shortcut icon" href="/images/favicon/favicon.ico">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
+</head>
+<body>
+  <div id="wrap" class="boxed">
+    <header>
+      <div class="container clearfix">
+        <div class="one-third column">
+          <div class="logo"><a href="/"><img src="/images/logo_light.png" alt="Testacular"></a></div>
+        </div>
+        <div class="two-thirds column">
+          <nav id="menu" class="navigation">
+            <ul id="nav">
+              <li><a href="javascript:void">about</a>
+                <ul>
+                  <li><a href="/about/changelog.html">Changelog</a></li>
+                  <li><a href="/about/versioning.html">Versioning</a></li>
+                </ul>
+              </li>
+              <li><a href="javascript:void">dev</a>
+                <ul>
+                  <li><a href="/dev/msg.html">Git Commit Message Convention</a></li>
+                  <li><a href="/dev/contributing.html">How to contribute</a></li>
+                  <li><a href="/dev/API.html">Public API</a></li>
+                </ul>
+              </li>
+              <li><a href="javascript:void">plus</a>
+                <ul>
+                  <li><a href="/plus/Teamcity.html">Teamcity</a></li>
+                  <li><a href="/plus/RequireJS.html">RequireJS</a></li>
+                  <li><a href="/plus/Cloud9.html">Cloud9 IDE Integration</a></li>
+                  <li><a href="/plus/CI.html">Jenkins CI Integration</a></li>
+                  <li><a href="/plus/AngularJS.html">AngularJS</a></li>
+                </ul>
+              </li>
+              <li><a href="javascript:void">config</a>
+                <ul>
+                  <li><a href="/config/preprocessors.html">Preprocessors</a></li>
+                  <li><a href="/config/files.html">Files</a></li>
+                  <li><a href="/config/file.html">Configuration File</a></li>
+                  <li><a href="/config/coverage.html">Coverage Reporter</a></li>
+                  <li><a href="/config/browsers.html">Browsers</a></li>
+                </ul>
+              </li>
+              <li><a href="javascript:void">intro</a>
+                <ul>
+                  <li><a href="/intro/why.html">Why?</a></li>
+                  <li><a href="/intro/troubleshooting.html">Troubleshooting</a></li>
+                  <li><a href="/intro/installation.html">Installation</a></li>
+                  <li><a href="/intro/configuration.html">Configuration</a></li>
+                </ul>
+              </li> 
+              <li><a href="">0.6.0</a>
+                <ul>
+                  <li> <a href="">0.6.0</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="sixteen columns">
+          <hr>
+        </div>
+      </div>
+    </header>
+    <div class="container clearfix">
+      <div class="sixteen columns">
+        <h1 class="page-title">Files<span class="line"></span></h1>
+      </div>
+      <div class="page-columns">
+        <div id="markdown" class="sixteen columns bottom"><h1 id="toc_0">Files</h1>
+
+<p>The files array determines wich files are loaded, watched and served by Testacular.</p>
+
+<p>Warning: The order in which the files are defined, determines the load order!</p>
+
+<h2 id="toc_1">Adapters</h2>
+
+<p>The first thing you usually need is an adapter. The following adapters are bundled with Testacular</p>
+
+<ul>
+<li>Mocha</li>
+<li>Jasmine</li>
+<li>QUnit (0.5.5)</li>
+<li>RequireJS (0.5.1)</li>
+</ul>
+
+<p>If you want to use any of these you add <code>LIBRARY</code> and <code>LIBRARY_ADAPTER</code> to your <code>files</code> list. So for
+example if you want to use Mocha you have the following in your config file.</p>
+<div class="highlight"><pre><code class="javascript"><span class="nx">files</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="nx">MOCHA</span><span class="p">,</span>
+  <span class="nx">MOCHA_ADAPTER</span>
+<span class="p">];</span>
+</code></pre></div>
+<h2 id="toc_2">Pattern matching and <code>basePath</code></h2>
+
+<p>All files that come from you and are not bundled with Testacular can get included via glob patterns. 
+For example you can just write <code>myFile.js</code> or something more elaborate like <code>test/unit/**/*.spec.js</code>. 
+These files get resolved to absolute paths using the <code>basePath</code> options, so if we set <code>basePath = &#39;../&#39;</code> and our configuration is in the folder <code>projectRoot/config</code>, our files get resolved to</p>
+
+<ul>
+<li><code>myFile.js</code> --&gt; <code>/projectRoot/myFile.js</code></li>
+<li><code>test/unit/**/*.spec.js</code> --&gt; <code>/projectRoot/test/unit/**/*.spec.js</code></li>
+</ul>
+
+<p>and then they are matched using <a href="https://github.com/isaacs/minimatch">minimatch</a> against the file system.</p>
+
+<h2 id="toc_3">Included, served, watched</h2>
+
+<p>Since version 0.5.2 there is the ability to configure the patterns more closely. If you define them like before a simple pattern like <code>&#39;test/unit/*.js&#39;</code> gets expanded internally to the following</p>
+<div class="highlight"><pre><code class="javascript">  <span class="p">{</span><span class="nx">pattern</span><span class="o">:</span> <span class="s1">&#39;test/unit/*.js&#39;</span><span class="p">,</span> <span class="nx">watched</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">included</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">served</span><span class="o">:</span> <span class="kc">true</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="toc_4"><code>pattern</code></h3>
+
+<ul>
+<li><strong>Description.</strong> The pattern to use for matching.</li>
+</ul>
+
+<h3 id="toc_5"><code>watched</code></h3>
+
+<ul>
+<li><strong>Type.</strong> Boolean</li>
+<li><strong>Default.</strong> <code>true</code></li>
+<li><strong>Description.</strong> 
+If <code>autoWatch</code> is <code>true</code> all files that have set <code>watched</code> to true will be 
+polled for changes.</li>
+</ul>
+
+<h3 id="toc_6"><code>included</code></h3>
+
+<ul>
+<li><strong>Type.</strong> Boolean</li>
+<li><strong>Default.</strong> <code>true</code></li>
+<li><strong>Description.</strong> Should the files be included into the loading process of the files into the browser.</li>
+</ul>
+
+<h3 id="toc_7"><code>served</code></h3>
+
+<ul>
+<li><strong>Type.</strong> Boolean</li>
+<li><strong>Default.</strong> <code>true</code></li>
+<li><strong>Description.</strong> Should the files be served by Testaculars webserver.</li>
+</ul>
+
+<h2 id="toc_8">Finished example</h2>
+
+<p>Here is a complete example showing the different options that are possible.</p>
+<div class="highlight"><pre><code class="javascript"><span class="nx">files</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="c1">// Adapter</span>
+  <span class="nx">MOCHA</span><span class="p">,</span>
+  <span class="nx">MOCHA_ADAPTER</span><span class="p">,</span>
+  <span class="c1">// simple patterns to load the needed testfiles</span>
+  <span class="s1">&#39;test/fixtures/**/*.html&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;test/unit/*.spec.js&#39;</span><span class="p">,</span>
+  <span class="c1">// this file gets served but will be ignored by the watcher</span>
+  <span class="p">{</span><span class="nx">pattern</span><span class="o">:</span> <span class="s1">&#39;compiled/index.html&#39;</span><span class="p">,</span> <span class="nx">watched</span><span class="o">:</span> <span class="kc">false</span><span class="p">},</span>
+  <span class="c1">// this file only gets watched but otherwise ignored</span>
+  <span class="p">{</span><span class="nx">pattern</span><span class="o">:</span> <span class="s1">&#39;app/index.html&#39;</span><span class="p">,</span> <span class="nx">included</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">served</span><span class="o">:</span> <span class="kc">false</span><span class="p">}</span>
+
+<span class="p">];</span>
+</code></pre></div></div>
+      </div>
+    </div>
+    <div class="push"></div>
+  </div>
+  <footer>
+    <div class="container">
+      <div class="ten columns"><span class="copyright"><a href="https://github.com/testacular/testacular">Testacular</a>&nbsp;is released under the<a href="https://github.com/testacular/testacular/blob/master/LICENSE" target="_blank">
+             
+            MIT license</a>. Site by&nbsp;<a href="https://github.com/Dignifiedquire" target="_blank">Friedel Ziegelmayer</a>.</span></div>
+      <div class="six columns">
+        <div class="social"><a href="https://github.com/vojtajina/testacular/" data-tooltip="GitHub Repo"><i class="icon-github-alt icon-large"></i></a><a href="https://github.com/vojtajina/testacular/issues" data-tooltip="Issues"><i class="icon-beaker icon-large"></i></a><a href="http://twitter.com/TestacularJS" data-tooltip="@TestacularJS"><i class="icon-twitter icon-large"></i></a><a href="https://groups.google.com/forum/#!forum/testacular" data-tooltip="Mailing List"><i class="icon-envelope-alt icon-large"></i></a></div>
+      </div>
+    </div>
+  </footer>
+</body>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/javascript/app.js">;</script><![endif]-->

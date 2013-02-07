@@ -13,7 +13,8 @@
     "grunt-contrib-uglify": "~0.1.1rc6",
     "grunt-contrib-mincss": "https://github.com/gruntjs/grunt-contrib-mincss/tarball/master",
     "grunt-contrib-connect": "~0.1.0",
-    "semver": "~1.1.2"
+    "semver": "~1.1.2",
+    "grunt-contrib-jade": "~0.4.0rc7"
   },
   "scripts": {
     "test": ""
