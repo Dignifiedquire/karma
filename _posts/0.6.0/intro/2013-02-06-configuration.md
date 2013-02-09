@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Configuration
-category: intro
+categories: ['0.6.0', 'intro']
 tags: 0.6.0
 ---
 # Configuration

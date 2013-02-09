@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Preprocessors
-category: config
+categories: ['0.6.0', 'config']
 tags: 0.6.0
 ---
 # Preprocessors

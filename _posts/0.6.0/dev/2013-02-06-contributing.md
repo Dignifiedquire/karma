@@ -1,7 +1,7 @@
 ---
 layout: default
 title: How to contribute
-category: dev
+categories: ['0.6.0', 'dev']
 tags: 0.6.0
 ---
 # How to contribute

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Troubleshooting
-category: intro
+categories: ['0.6.0', 'intro']
 tags: 0.6.0
 ---
 # Troubleshooting

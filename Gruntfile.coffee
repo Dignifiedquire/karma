@@ -68,5 +68,5 @@ module.exports = (grunt) ->
     'jade:docs'
   ]
   
-  grunt.registerTask 'default', ['shell:server', 'watch']
+  grunt.registerTask 'default', ['build', 'shell:server', 'watch']
 

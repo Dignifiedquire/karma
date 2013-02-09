@@ -1,5 +1,6 @@
 ---
 title: Testacular
+tags: 0.6.0
 ---
 <!DOCTYPE html><!--[if lt IE 7]>
 <html lang="en" class="ie ie6"></html><![endif]--><!--[if IE 7]>
@@ -36,9 +37,9 @@ title: Testacular
         </div>
         <div class="two-thirds column">
           <nav id="menu" class="navigation">
-            <ul id="nav">{% for category in site.categories %}
-              <li><a href="javascript:void">{{category[0]}}</a>
-                <ul>{% for post in category[1] %}
+            <ul id="nav">{% for section in site.sections %}
+              <li><a href="javascript:void">{{section}}</a>
+                <ul>{% for post in site.categories[section] %}
                   <li><a href="{{post.url}}">{{post.title}}</a></li>{% endfor %}
                 </ul>
               </li>{% endfor %} 

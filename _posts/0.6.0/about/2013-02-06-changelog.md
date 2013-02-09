@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Changelog
-category: about
+categories: ['0.6.0', 'about']
 tags: 0.6.0
 ---
 # Changelog

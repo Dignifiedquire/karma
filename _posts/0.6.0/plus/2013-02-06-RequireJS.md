@@ -2,7 +2,7 @@
 layout: default
 title: RequireJS
 tags: 0.6.0
-category: plus
+categories: ['0.6.0', 'plus']
 ---
 
 # RequireJS
