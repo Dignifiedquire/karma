@@ -30,12 +30,36 @@ module.exports = (grunt) ->
         files: 
           '_layouts/default.html': '_src/jade/default.jade'
           'index.html': '_src/jade/index.jade'
-          
-    
+
+    shell:
+      options:
+        stdout: true
+
+      server:
+        command: 'jekyll --server 8000 --auto'
+        options:
+          async: true
+      build:
+        command: 'jekyll'
+                
+    watch:
+      jade:
+        files: ['_src/jade/**/*.jade']
+        tasks: ['jade', 'shell:build']
+      css:
+        files: ['_src/less/**/*.jade']
+        tasks: ['less', 'mincss', 'shell:build']
+      javascript:
+        files: ['_src/javascript/**/*.jade']
+        tasks: ['uglify', 'shell:build']
+
+            
   grunt.loadNpmTasks 'grunt-contrib-mincss'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-jade'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-shell-spawn'
 
   grunt.registerTask 'build', [
     'less:docs'
@@ -44,5 +68,5 @@ module.exports = (grunt) ->
     'jade:docs'
   ]
   
-  grunt.registerTask 'default', ['build']
+  grunt.registerTask 'default', ['shell:server', 'watch']
 
