@@ -37,3 +37,4 @@ $ grunt
 [Ruby]: http://www.ruby-lang.org/en/
 [jekyll]: https://github.com/mojombo/jekyll
 [pygments]: http://pygments.org/
+[grunt-cli]: http://github.com/gruntjs/grunt-cli

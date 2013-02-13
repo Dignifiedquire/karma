@@ -4,7 +4,6 @@ title: Installation
 categories: ['0.6.0', 'intro']
 tags: 0.6.0
 ---
-# Installation
 
 Testacular runs on [Node.js] and is available as a node module via [NPM].
 

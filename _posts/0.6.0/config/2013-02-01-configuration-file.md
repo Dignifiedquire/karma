@@ -4,7 +4,6 @@ title: Configuration File
 categories: ['0.6.0', 'config']
 tags: 0.6.0
 ---
-# Configuration File
 
 In order to serve you well, Testacular needs to know about your project. That's done through a
 configuration file.

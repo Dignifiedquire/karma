@@ -4,7 +4,6 @@ title: Git Commit Message Convention
 categories: ['0.6.0', 'dev']
 tags: 0.6.0
 ---
-# Git Commit Message Convention
 
 Format of the commit message:
 ```

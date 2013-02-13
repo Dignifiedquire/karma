@@ -1,10 +1,5 @@
 extends default
 
-block yaml-front-matter
-  - var matter = '---\ntitle: Testacular\ntags: 0.6.0\n---\n'
-  !{matter}
-
-
 block content
   .container.clearfix
     #welcome.sixteen.columns
@@ -34,13 +29,13 @@ block content
             ul.slides
               li
                 a(href='http://www.youtube.com/watch?v=MVw8N3hTfCI')
-                  img(src='images/img/screencast.png', alt='Screencast')
+                  img(src='/images/img/screencast.png', alt='Screencast')
                 p.flex-caption
                   span Introductory Screencast 
                   | The spectacular quick start to Testacular.
               li
                 a(href='http://www.youtube.com/watch?v=5mHjJ4xf_K0')
-                  img(src='images/img/jseverywhere.png', alt='JS.everywhere 2012')
+                  img(src='/images/img/jseverywhere.png', alt='JS.everywhere 2012')
                 p.flex-caption
                   span JS Everywhere 2012 Europe
                   | Watch Vojta Jína presenting Testacular at JS.everywhere.

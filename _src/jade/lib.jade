@@ -4,9 +4,27 @@ mixin navigation()
   li
     a(href='javascript:void') {{section}}
     ul
-      | {% for post in site.categories[section] %}
+      // The most hacky shit way there is to write an ordered
+      // list of items..but that's all that you get in jekyll...
+      | {% capture get_items %}
+      |    {% for cat in site.categories[section] %}
+      |    {{ cat | map: 'title' | replace: ' ', '_'}}
+      |    {% endfor %}
+      | {% endcapture %}
+      | {% capture num_words %}
+      |   {{ get_items | split:' ' |  sort | join:' ' | number_of_words }}
+      | {% endcapture %}
+      | {% for item in (1..num_words) %}
+      | {% capture url %}
+      |   {{ site.categories[section] | sort: 'date' | map: 'url' | join:' ' | truncatewords:item | remove:'...' | split:' '  | last | replace: '_', ' '}}
+      | {% endcapture %}
+      | {% capture sectionPart %}/{{section}}/{% endcapture%}
+      | {% capture title %}
+      |   {{url | replace: '.html', '' | replace: sectionPart, '' | replace: '/', '' | replace: page.tags[0], ''  | replace: '-', ' '}}
+      | {% endcapture %}
       li
-        a(href='{{post.url}}') {{post.title}}
+        a(href='{{url}}') 
+          | {{ title }}
       | {% endfor %}
   | {% endfor %} 
   li
@@ -14,5 +32,5 @@ mixin navigation()
     ul
       | {% for tag in site.tags %}
       li 
-        a(href='') {{ tag[0] }}
+        a(href='/{{tag[0]}}/index.html') {{ tag[0] }}
       | {% endfor %}

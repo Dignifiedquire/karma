@@ -4,7 +4,6 @@ title: Troubleshooting
 categories: ['0.6.0', 'intro']
 tags: 0.6.0
 ---
-# Troubleshooting
 
 You have some problems? Look no further. Known problems and solutions are collected here so you don't have to figure them out again and again.
 

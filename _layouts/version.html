@@ -35,27 +35,8 @@
           <nav id="menu" class="navigation">
             <ul id="nav">{% for section in site.sections %}
               <li><a href="javascript:void">{{section}}</a>
-                <ul>
-                  <!-- The most hacky shit way there is to write an ordered-->
-                  <!-- list of items..but that's all that you get in jekyll...-->{% capture get_items %}
-                     {% for cat in site.categories[section] %}
-                     {{ cat | map: 'title' | replace: ' ', '_'}}
-                     {% endfor %}
-                  {% endcapture %}
-                  {% capture num_words %}
-                    {{ get_items | split:' ' |  sort | join:' ' | number_of_words }}
-                  {% endcapture %}
-                  {% for item in (1..num_words) %}
-                  {% capture url %}
-                    {{ site.categories[section] | sort: 'date' | map: 'url' | join:' ' | truncatewords:item | remove:'...' | split:' '  | last | replace: '_', ' '}}
-                  {% endcapture %}
-                  {% capture sectionPart %}/{{section}}/{% endcapture%}
-                  {% capture title %}
-                    {{url | replace: '.html', '' | replace: sectionPart, '' | replace: '/', '' | replace: page.tags[0], ''  | replace: '-', ' '}}
-                  {% endcapture %}
-                  <li><a href="{{url}}">
-                       
-                      {{ title }}</a></li>{% endfor %}
+                <ul>{% for post in site.categories[section] %}
+                  <li><a href="{{post.url}}">{{post.title}}</a></li>{% endfor %}
                 </ul>
               </li>{% endfor %} 
               <li><a href="">{{page.tags}}</a>
@@ -72,11 +53,36 @@
       </div>
     </header>
     <div class="container clearfix">
-      <div class="sixteen columns">
-        <h1 class="page-title">{{page.title}}<span class="line"></span></h1>
+      <div id="welcome" class="sixteen columns">
+        <div class="qoute">
+          <div class="ten-and-half columns omega">
+            <h2>Spectacular Test Runner for JavaScript</h2>
+            <blockquote>On the&nbsp;<a href="http://www.angularjs.org/">AngularJS</a>&nbsp;team, we rely on testing and we always
+              seek for better tools that would make our life easier.
+              That's why we created Testacular - a test runner that fits
+              all our needs.
+            </blockquote>
+          </div>
+          <div class="four-and-half columns alpha"><a href="https://github.com/testacular/testacular" class="btn-github link"><i class="icon-github-alt"></i>&nbsp; View project on GitHub</a><a href="https://npmjs.org/package/testacular" class="btn-npm link"><i class="icon-hdd"></i>&nbsp; npm install -g testacular</a></div>
+        </div>
       </div>
-      <div class="page-columns">
-        <div id="markdown" class="sixteen columns bottom">{{content}}</div>
+    </div>
+    <div id="slider">
+      <div class="container clearfix">
+        <div class="sixteen columns">
+          <div class="flex-container">
+            <div class="flexslider">
+              <ul class="slides">
+                <li><a href="http://www.youtube.com/watch?v=MVw8N3hTfCI"><img src="/images/img/screencast.png" alt="Screencast"></a>
+                  <p class="flex-caption"><span>Introductory Screencast </span>The spectacular quick start to Testacular.</p>
+                </li>
+                <li><a href="http://www.youtube.com/watch?v=5mHjJ4xf_K0"><img src="/images/img/jseverywhere.png" alt="JS.everywhere 2012"></a>
+                  <p class="flex-caption"><span>JS Everywhere 2012 Europe</span>Watch Vojta Jína presenting Testacular at JS.everywhere.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="push"></div>

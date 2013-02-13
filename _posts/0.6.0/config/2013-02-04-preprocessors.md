@@ -4,7 +4,6 @@ title: Preprocessors
 categories: ['0.6.0', 'config']
 tags: 0.6.0
 ---
-# Preprocessors
 
 Preprocessors in Testacular allow you to do some work with your files before
 they get served to the browser. The configuration of these happens in this block

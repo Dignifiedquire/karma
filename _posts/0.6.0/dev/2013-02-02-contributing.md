@@ -4,7 +4,6 @@ title: How to contribute
 categories: ['0.6.0', 'dev']
 tags: 0.6.0
 ---
-# How to contribute
 
 If you are thinking about making Testacular better, or you just want to hack on it, that’s great here 
 are some tips to get you started.
@@ -64,7 +63,7 @@ If grunt fails, make sure grunt-0.4x is installed: https://github.com/gruntjs/gr
 * Send a pull request to the `master` branch.
 
 
-# Additional Resources
+## Additional Resources
 
 * [Issue tracker](https://github.com/vojtajina/testacular/issues)
 * [Mailing List](https://groups.google.com/forum/#!forum/testacular)

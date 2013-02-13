@@ -4,7 +4,6 @@ title: Public API
 categories: ['0.6.0', 'dev']
 tags: 0.6.0
 ---
-# Public API
 
 Most of the time, you will be using Testacular directly from the command line.
 

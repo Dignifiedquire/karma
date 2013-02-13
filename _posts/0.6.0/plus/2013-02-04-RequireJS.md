@@ -5,7 +5,6 @@ tags: 0.6.0
 categories: ['0.6.0', 'plus']
 ---
 
-# RequireJS
 
 ## Configure Testacular
 

@@ -1,5 +1,5 @@
-module.exports = (grunt) ->
 
+module.exports = (grunt) ->
   # Project configuration.
   grunt.initConfig
     mincss:
@@ -27,14 +27,15 @@ module.exports = (grunt) ->
       options:
         pretty: true
       docs:
-        files: 
-          '_layouts/default.html': '_src/jade/default.jade'
-          'index.html': '_src/jade/index.jade'
+        files:
+          '_layouts/index.html': '_src/jade/index.jade'
+          '_layouts/default.html': '_src/jade/default.jade'           
+          'index.html': '_src/jade/index_main.jade'
 
     shell:
       options:
         stdout: true
-
+        stderr: true
       server:
         command: 'jekyll --server 8000 --auto'
         options:

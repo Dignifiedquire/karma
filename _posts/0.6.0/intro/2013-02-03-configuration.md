@@ -4,7 +4,6 @@ title: Configuration
 categories: ['0.6.0', 'intro']
 tags: 0.6.0
 ---
-# Configuration
 In order to serve you well, Testacular needs to know about your project. That's done through a configuration file.
 
 For an example configuration, see [test/client/testacular.conf.js]

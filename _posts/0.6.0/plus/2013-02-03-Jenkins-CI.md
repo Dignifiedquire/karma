@@ -4,7 +4,6 @@ title: Jenkins CI Integration
 categories: ['0.6.0', 'plus']
 tags: 0.6.0
 ---
-# Jenkins CI Integration
 
 [Jenkins CI] is one of the most popular continuous integration servers
 in the market today. At some point while developing your [Angular]
