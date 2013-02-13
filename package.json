@@ -1,6 +1,7 @@
 {
-  "name": "testacular-docs",
+  "name": "testacular.github.com",
   "version": "0.0.1",
+  "private": true,
   "description": "",
   "main": "",
   "dependencies": {},
@@ -19,8 +20,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Dignifiedquire/testacular.git"
+    "url": "https://github.com/testacular/testacular.github.com.git"
   },
-  "author": "",
+  "author": "Friedel Ziegelmayer",
   "license": "MIT"
 }
