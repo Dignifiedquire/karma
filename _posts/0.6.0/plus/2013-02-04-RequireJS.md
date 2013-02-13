@@ -89,7 +89,7 @@ Testacular serves files under the `/base` directory. So, on the server, requests
 ### Require Each Test File
 
 One of the things I hate is having to update a master list of all tests to run every time I add a test. There is no config option for this, but there's an easy way to get around it by filtering the tests from the `window.__testacular__.files` object.
-The code is included in the example below and the original suggestion came from <https://github.com/vojtajina/testacular/pull/236>.
+The code is included in the example below and the original suggestion came from <https://github.com/testacular/testacular/pull/236>.
 
 ### Asynchronously Run Testacular
 
