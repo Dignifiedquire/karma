@@ -46,16 +46,12 @@
                     {{ get_items | split:' ' |  sort | join:' ' | number_of_words }}
                   {% endcapture %}
                   {% for item in (1..num_words) %}
-                  {% capture url %}
-                    {{ site.categories[section] | sort: 'date' | map: 'url' | join:' ' | truncatewords:item | remove:'...' | split:' '  | last | replace: '_', ' '}}
-                  {% endcapture %}
-                  {% capture sectionPart %}/{{section}}/{% endcapture%}
-                  {% capture title %}
-                    {{url | replace: '.html', '' | replace: sectionPart, '' | replace: '/', '' | replace: page.tags[0], ''  | replace: '-', ' '}}
-                  {% endcapture %}
+                  {% capture url %}{{ site.categories[section] | sort: 'date' | map: 'url' | join:' ' | truncatewords:item | remove:'...' | split:' '  | last | replace: '_', ' '}}{% endcapture %}
+                  {% capture title %}        
+                  {% for post in site.categories[section] %}{% if post.url == url %}{{post.title}}{% endif %}{% endfor %}{% endcapture %}
                   <li><a href="{{url}}">
                        
-                      {{ title }}</a></li>{% endfor %}
+                      {{title}}</a></li>{% endfor %}
                 </ul>
               </li>{% endfor %} 
               <li><a href="">{{page.tags}}</a>

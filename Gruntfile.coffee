@@ -1,4 +1,3 @@
-
 module.exports = (grunt) ->
   # Project configuration.
   grunt.initConfig
@@ -28,9 +27,9 @@ module.exports = (grunt) ->
         pretty: true
       docs:
         files:
-          '_layouts/index.html': '_src/jade/index.jade'
+          '_layouts/version.html': '_src/jade/version.jade'
           '_layouts/default.html': '_src/jade/default.jade'           
-          'index.html': '_src/jade/index_main.jade'
+          'index.html': '_src/jade/index.jade'
 
     shell:
       options:
