@@ -13,7 +13,7 @@ describe 'middleware.proxy', ->
 
   mockProxy =
     on: ->
-    proxyRequest: (req, res, opt) ->
+    web: (req, res, opt) ->
       actualOptions = opt
       requestedUrl = req.url
       res.writeHead 200
@@ -32,11 +32,11 @@ describe 'middleware.proxy', ->
 
     expect(nextSpy).not.to.have.been.called
     expect(requestedUrl).to.equal '/test.html'
-    expect(actualOptions).to.deep.equal {
-      host: 'localhost',
-      port: '9000',
-      target:{https:false, rejectUnauthorized:true}
-      }
+    expect(actualOptions).to.deep.equal
+      target: 'localhost:9000'
+      ssl: false
+      secure :true
+
     done()
 
    it 'should enable https', (done) ->
@@ -45,11 +45,11 @@ describe 'middleware.proxy', ->
 
     expect(nextSpy).not.to.have.been.called
     expect(requestedUrl).to.equal '/test.html'
-    expect(actualOptions).to.deep.equal {
-      host: 'localhost',
-      port: '9000',
-      target:{https:true, rejectUnauthorized:true}
-      }
+    expect(actualOptions).to.deep.equal
+      target: 'localhost:9000'
+      ssl: true
+      secure: true
+
     done()
 
    it 'disable ssl validation', (done) ->
@@ -58,11 +58,11 @@ describe 'middleware.proxy', ->
 
     expect(nextSpy).not.to.have.been.called
     expect(requestedUrl).to.equal '/test.html'
-    expect(actualOptions).to.deep.equal {
-      host: 'localhost',
-      port: '9000',
-      target:{https:true, rejectUnauthorized:false}
-      }
+    expect(actualOptions).to.deep.equal
+      target: 'localhost:9000'
+      ssl: true
+      secure: false
+
     done()
 
   it 'should support multiple proxies', ->
@@ -74,11 +74,10 @@ describe 'middleware.proxy', ->
 
     expect(nextSpy).not.to.have.been.called
     expect(requestedUrl).to.equal '/test.html'
-    expect(actualOptions).to.deep.equal {
-      host: 'gstatic.com',
-      port: '80',
-      target:{https:false, rejectUnauthorized:true}
-      }
+    expect(actualOptions).to.deep.equal
+      target: 'gstatic.com:80'
+      ssl: false
+      secure: true
 
   it 'should handle nested proxies', ->
     proxy = m.createProxyHandler mockProxy, {
@@ -89,11 +88,10 @@ describe 'middleware.proxy', ->
 
     expect(nextSpy).not.to.have.been.called
     expect(requestedUrl).to.equal '/something/Test.html'
-    expect(actualOptions).to.deep.equal {
-      host: 'gstatic.com',
-      port: '80',
-      target:{https:false, rejectUnauthorized:true}
-      }
+    expect(actualOptions).to.deep.equal
+      target: 'gstatic.com:80'
+      ssl: false
+      secure: true
 
 
   it 'should call next handler if the path is not proxied', ->
