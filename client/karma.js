@@ -13,9 +13,8 @@ var Karma = function(socket, iframe, opener, navigator, location) {
   var queryParams = util.parseQueryParams(location.search);
   var browserId = queryParams.id || util.generateId('manual-');
   var returnUrl = queryParams['return_url' + ''] || null;
-  var currentTransport;
 
-  var resultsBufferLimit = 1;
+  var resultsBufferLimit = 50;
   var resultsBuffer = [];
 
   this.VERSION = constant.VERSION;
@@ -103,7 +102,6 @@ var Karma = function(socket, iframe, opener, navigator, location) {
   };
 
   this.stringify = stringify;
-
 
   var clearContext = function() {
     reloadingContext = true;
@@ -218,14 +216,9 @@ var Karma = function(socket, iframe, opener, navigator, location) {
 
   // report browser name, id
   socket.on('connect', function() {
-    currentTransport = socket.socket.transport.name;
-
-    // TODO(vojta): make resultsBufferLimit configurable
-    if (currentTransport === 'websocket' || currentTransport === 'flashsocket') {
+    socket.io.engine.on('upgrade', function() {
       resultsBufferLimit = 1;
-    } else {
-      resultsBufferLimit = 50;
-    }
+    })
 
     socket.emit('register', {
       name: navigator.userAgent,
