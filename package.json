@@ -199,6 +199,7 @@
     "grunt-jscs-checker": "~0.6.1",
     "grunt-npm": "~0.0.1",
     "grunt-simple-mocha": "*",
+    "karma-browserify": "^4.1.2",
     "karma-browserstack-launcher": "*",
     "karma-chrome-launcher": "*",
     "karma-coffee-preprocessor": "*",
@@ -229,7 +230,7 @@
   "main": "./lib/index",
   "bin": {},
   "engines": {
-    "node":  ">=0.8 <=0.12 || >=1 <=2"
+    "node": ">=0.8 <=0.12 || >=1 <=2"
   },
   "version": "0.12.31",
   "license": "MIT"
