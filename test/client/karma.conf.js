@@ -7,17 +7,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'client/*.js',
       'test/client/*.js'
     ],
 
     // list of files to exclude
     exclude: [
-      'client/main.js'
     ],
 
     preprocessors: {
-      'client/*.js': ['browserify'],
       'test/client/*.js': ['browserify']
     },
 
