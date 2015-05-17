@@ -15,7 +15,7 @@ module.exports = function(config) {
     ],
 
     preprocessors: {
-      '**/*.browserify': ['browserify-bundle'],
+      //'**/*.browserify': ['browserify-bundle'],
       'test/client/*.js': ['browserify']
     },
 
