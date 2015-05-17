@@ -10,7 +10,6 @@ _real_ browsers.
 > The main purpose of Karma is to make your TDD development easy,
 >  fast, and fun.
 
-
 ## Help and Support
 
 * Obligatory [documentation]
