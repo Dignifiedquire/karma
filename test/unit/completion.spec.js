@@ -1,63 +1,63 @@
-// ==============================================================================
-// lib/completion.js module
-// ==============================================================================
-describe('completion', function () {
-  var c = require('../../lib/completion')
-  var completion = null
+var c = require('../../lib/completion')
 
-  var mockEnv = function (line) {
+describe('completion', function () {
+  var completion
+
+  function mockEnv (line) {
     var words = line.split(' ')
 
-    return {words: words,
+    return {
+      words: words,
       count: words.length,
       last: words[words.length - 1],
-    prev: words[words.length - 2]}
+      prev: words[words.length - 2]
+    }
   }
 
-  beforeEach(function () {
-    sinon.stub(console, 'log', function (msg) { return completion.push(msg); })
-    return completion = []
+  beforeEach(() => {
+    sinon.stub(console, 'log', msg => completion.push(msg))
+    completion = []
   })
 
-  describe('opositeWord', function () {
-    it('should handle --no-x args', function () {
-      return expect(c.opositeWord('--no-single-run')).to.equal('--single-run')
+  describe('opositeWord', () => {
+    it('should handle --no-x args', () => {
+      expect(c.opositeWord('--no-single-run')).to.equal('--single-run')
     })
 
-    it('should handle --x args', function () {
-      return expect(c.opositeWord('--browsers')).to.equal('--no-browsers')
+    it('should handle --x args', () => {
+      expect(c.opositeWord('--browsers')).to.equal('--no-browsers')
     })
 
-    return it('should ignore args without --', function () {
-      return expect(c.opositeWord('start')).to.equal(null)
+    it('should ignore args without --', () => {
+      expect(c.opositeWord('start')).to.equal(null)
     })
   })
 
-  describe('sendCompletion', function () {
-    it('should filter only words matching last typed partial', function () {
+  describe('sendCompletion', () => {
+    it('should filter only words matching last typed partial', () => {
       c.sendCompletion(['start', 'init', 'run'], mockEnv('in'))
-      return expect(completion).to.deep.equal(['init'])
+      expect(completion).to.deep.equal(['init'])
     })
 
-    it('should filter out already used words/args', function () {
+    it('should filter out already used words/args', () => {
       c.sendCompletion(['--single-run', '--port', '--xxx'], mockEnv('start --single-run '))
-      return expect(completion).to.deep.equal(['--port', '--xxx'])
+      expect(completion).to.deep.equal(['--port', '--xxx'])
     })
 
-    return it('should filter out already used oposite words', function () {
+    it('should filter out already used oposite words', () => {
       c.sendCompletion(['--auto-watch', '--port'], mockEnv('start --no-auto-watch '))
-      return expect(completion).to.deep.equal(['--port'])
+      expect(completion).to.deep.equal(['--port'])
     })
   })
 
-  return describe('complete', function () {
-    return it('should complete the basic commands', function () {
+  describe('complete', () => {
+    it('should complete the basic commands', () => {
       c.complete(mockEnv(''))
       expect(completion).to.deep.equal(['start', 'init', 'run'])
 
       completion.length = 0 // reset
       c.complete(mockEnv('s'))
-      return expect(completion).to.deep.equal(['start'])
+      expect(completion).to.deep.equal(['start'])
     })
   })
 })
