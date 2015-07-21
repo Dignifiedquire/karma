@@ -14,7 +14,7 @@ chai.use(require('chai-as-promised'))
 chai.use(require('sinon-chai'))
 chai.use(require('chai-subset'))
 
-beforeEach(function () {
+beforeEach(() => {
   global.sinon = sinon.sandbox.create()
 
   // set logger to log INFO, but do not append to console
@@ -22,13 +22,13 @@ beforeEach(function () {
   logger.setup('INFO', false, [])
 })
 
-afterEach(function () {
+afterEach(() => {
   global.sinon.restore()
 })
 
 // TODO(vojta): move to helpers or something
-chai.use(function (chai, utils) {
-  chai.Assertion.addMethod('beServedAs', function (expectedStatus, expectedBody) {
+chai.use((chai, utils) => {
+  chai.Assertion.addMethod('beServedAs', (expectedStatus, expectedBody) => {
     var response = utils.flag(this, 'object')
 
     this.assert(response._status === expectedStatus,
@@ -37,7 +37,7 @@ chai.use(function (chai, utils) {
       `expected response body '#{response._body}' to be '#{exp)ectedBody}'`)
   })
 
-  chai.Assertion.addMethod('beNotServed', function () {
+  chai.Assertion.addMethod('beNotServed', () => {
     var response = utils.flag(this, 'object')
 
     this.assert(response._status === null,
@@ -50,35 +50,35 @@ chai.use(function (chai, utils) {
 
 // TODO(vojta): move it somewhere ;-)
 var nextTickQueue = []
-var nextTickCallback = function () {
+var nextTickCallback = () => {
   if (!nextTickQueue.length) throw new Error('Nothing scheduled!')
   nextTickQueue.shift()()
 
   if (nextTickQueue.length) process.nextTick(nextTickCallback)
 }
-global.scheduleNextTick = function (action) {
+global.scheduleNextTick = action => {
   nextTickQueue.push(action)
 
   if (nextTickQueue.length === 1) process.nextTick(nextTickCallback)
 }
 var nextQueue = []
-var nextCallback = function () {
+var nextCallback = () => {
   // if not nextQueue.length then throw new Error 'Nothing scheduled!'
   nextQueue.shift()()
 }
 
-global.scheduleNextTick = function (action) {
+global.scheduleNextTick = action => {
   nextTickQueue.push(action)
 
   if (nextTickQueue.length === 1) process.nextTick(nextTickCallback)
 }
-global.scheduleNext = function (action) {
+global.scheduleNext = action => {
   nextQueue.push(action)
 }
 
 global.next = nextCallback
 
-beforeEach(function () {
+beforeEach(() => {
   nextTickQueue.length = 0
   nextQueue.length = 0
 })

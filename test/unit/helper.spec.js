@@ -3,9 +3,7 @@ describe('helper', () => {
 
   describe('browserFullNameToShort', () => {
     // helper function
-    var expecting = function (name) {
-      return expect(helper.browserFullNameToShort(name))
-    }
+    var expecting = name => expect(helper.browserFullNameToShort(name))
 
     it('should parse iOS', () => {
       expecting(

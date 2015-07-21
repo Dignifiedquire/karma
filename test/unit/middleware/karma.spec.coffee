@@ -32,8 +32,7 @@ describe 'middleware.karma', ->
     response = new HttpResponseMock
     filesDeferred = helper.defer()
     serveFile = createServeFile fsMock, '/karma/static'
-    handler = createKarmaMiddleware filesDeferred.promise, serveFile,
-      '/base/path', '/__karma__/', clientConfig
+    handler = createKarmaMiddleware filesDeferred.promise, serveFile, '/base/path', '/__karma__/', clientConfig
 
   # helpers
   includedFiles = (files) ->
@@ -105,9 +104,7 @@ describe 'middleware.karma', ->
 
     response.once 'end', ->
       expect(nextSpy).not.to.have.been.called
-      expect(response).to.beServedAs 200,
-        'CLIENT HTML\n<meta http-equiv="X-UA-Compatible" content="xxx=yyy"/>' +
-        '?x-ua-compatible=xxx%3Dyyy'
+      expect(response).to.beServedAs 200, 'CLIENT HTML\n<meta http-equiv="X-UA-Compatible" content="xxx=yyy"/>' + '?x-ua-compatible=xxx%3Dyyy'
       done()
 
     callHandlerWith '/?x-ua-compatible=xxx%3Dyyy'
@@ -117,8 +114,7 @@ describe 'middleware.karma', ->
 
     response.once 'end', ->
       expect(nextSpy).not.to.have.been.called
-      expect(response).to.beServedAs 200,
-        'DEBUG\n\n<meta http-equiv="X-UA-Compatible" content="xxx=yyy"/>'
+      expect(response).to.beServedAs 200, 'DEBUG\n\n<meta http-equiv="X-UA-Compatible" content="xxx=yyy"/>'
       done()
 
     callHandlerWith '/__karma__/debug.html?x-ua-compatible=xxx%3Dyyy'
@@ -141,9 +137,7 @@ describe 'middleware.karma', ->
 
     response.once 'end', ->
       expect(nextSpy).not.to.have.been.called
-      expect(response).to.beServedAs 200, 'CONTEXT\n' +
-      '<script type="text/javascript" src="/__karma__/absolute/first.js?sha123"></script>\n' +
-      '<script type="application/dart" src="/__karma__/absolute/second.dart?sha456"></script>'
+      expect(response).to.beServedAs 200, 'CONTEXT\n' + '<script type="text/javascript" src="/__karma__/absolute/first.js?sha123"></script>\n' + '<script type="application/dart" src="/__karma__/absolute/second.dart?sha456"></script>'
       done()
 
     callHandlerWith '/__karma__/context.html'
@@ -157,9 +151,7 @@ describe 'middleware.karma', ->
 
     response.once 'end', ->
       expect(nextSpy).not.to.have.been.called
-      expect(response).to.beServedAs 200, 'CONTEXT\n' +
-      '<link type="text/css" href="/__karma__/absolute/first.css?sha007" rel="stylesheet">\n' +
-      '<link href="/__karma__/absolute/second.html?sha678" rel="import">'
+      expect(response).to.beServedAs 200, 'CONTEXT\n' + '<link type="text/css" href="/__karma__/absolute/first.css?sha007" rel="stylesheet">\n' + '<link href="/__karma__/absolute/second.html?sha678" rel="import">'
       done()
 
     callHandlerWith '/__karma__/context.html'
@@ -172,9 +164,7 @@ describe 'middleware.karma', ->
 
     response.once 'end', ->
       expect(nextSpy).not.to.have.been.called
-      expect(response).to.beServedAs 200, 'CONTEXT\n' +
-      '<script type="text/javascript" src="/__karma__/absolute/some/abc/a.js?sha"></script>\n' +
-      '<script type="text/javascript" src="/__karma__/base/b.js?shaaa"></script>'
+      expect(response).to.beServedAs 200, 'CONTEXT\n' + '<script type="text/javascript" src="/__karma__/absolute/some/abc/a.js?sha"></script>\n' + '<script type="text/javascript" src="/__karma__/base/b.js?shaaa"></script>'
       done()
 
     callHandlerWith '/__karma__/context.html'
@@ -190,11 +180,7 @@ describe 'middleware.karma', ->
 
     response.once 'end', ->
       expect(nextSpy).not.to.have.been.called
-      expect(response).to.beServedAs 200, 'CONTEXT\n' +
-      '<link type="text/css" href="/__karma__/absolute/some/abc/a.css?sha1" rel="stylesheet">\n' +
-      '<link type="text/css" href="/__karma__/base/b.css?sha2" rel="stylesheet">\n' +
-      '<link href="/__karma__/absolute/some/abc/c.html?sha3" rel="import">\n' +
-      '<link href="/__karma__/base/d.html?sha4" rel="import">'
+      expect(response).to.beServedAs 200, 'CONTEXT\n' +   '<link type="text/css" href="/__karma__/absolute/some/abc/a.css?sha1" rel="stylesheet">\n' +      '<link type="text/css" href="/__karma__/base/b.css?sha2" rel="stylesheet">\n' +      '<link href="/__karma__/absolute/some/abc/c.html?sha3" rel="import">\n' +      '<link href="/__karma__/base/d.html?sha4" rel="import">'
       done()
 
     callHandlerWith '/__karma__/context.html'
@@ -228,8 +214,7 @@ describe 'middleware.karma', ->
     ]
 
     response.once 'end', ->
-      expect(response).to.beServedAs 200, 'CONTEXT\n' +
-      '<script type="text/javascript" src="http://some.url.com/whatever"></script>'
+      expect(response).to.beServedAs 200, 'CONTEXT\n' +      '<script type="text/javascript" src="http://some.url.com/whatever"></script>'
       done()
 
     callHandlerWith '/__karma__/context.html'
@@ -260,11 +245,7 @@ describe 'middleware.karma', ->
     ]
 
     response.once 'end', ->
-      expect(response).to.beServedAs 200, 'window.__karma__.files = {\n' +
-      "  '/__karma__/absolute/some/abc/a.js': 'sha_a',\n" +
-      "  '/__karma__/base/b.js': 'sha_b',\n" +
-      "  '/__karma__/absolute\\\\windows\\\\path\\\\uuu\\\\c.js': 'sha_c'\n" +
-      "};\n"
+      expect(response).to.beServedAs 200, 'window.__karma__.files = {\n' +      "  '/__karma__/absolute/some/abc/a.js': 'sha_a',\n" +      "  '/__karma__/base/b.js': 'sha_b',\n" +      "  '/__karma__/absolute\\\\windows\\\\path\\\\uuu\\\\c.js': 'sha_c'\n" +      "};\n"
       done()
 
     callHandlerWith '/__karma__/context.html'
@@ -278,9 +259,7 @@ describe 'middleware.karma', ->
 
     response.once 'end', ->
       expect(nextSpy).not.to.have.been.called
-      expect(response).to.beServedAs 200, 'DEBUG\n' +
-      '<script type="text/javascript" src="/__karma__/absolute/first.js"></script>\n' +
-      '<script type="text/javascript" src="/__karma__/base/b.js"></script>'
+      expect(response).to.beServedAs 200, 'DEBUG\n' +      '<script type="text/javascript" src="/__karma__/absolute/first.js"></script>\n' +      '<script type="text/javascript" src="/__karma__/base/b.js"></script>'
       done()
 
     callHandlerWith '/__karma__/debug.html'
@@ -296,11 +275,8 @@ describe 'middleware.karma', ->
 
     response.once 'end', ->
       expect(nextSpy).not.to.have.been.called
-      expect(response).to.beServedAs 200, 'DEBUG\n' +
-      '<link type="text/css" href="/__karma__/absolute/first.css" rel="stylesheet">\n' +
-      '<link type="text/css" href="/__karma__/base/b.css" rel="stylesheet">\n' +
-      '<link href="/__karma__/absolute/second.html" rel="import">\n' +
-      '<link href="/__karma__/base/d.html" rel="import">'
+      expect(response).to.beServedAs 200, 'DEBUG\n' +      '<link type="text/css" href="/__karma__/absolute/first.css" rel="stylesheet">\n' +      '<link type="text/css" href="/__karma__/base/b.css" rel="stylesheet">\n' +
+      '<link href="/__karma__/absolute/second.html" rel="import">\n' +      '<link href="/__karma__/base/d.html" rel="import">'
       done()
 
     callHandlerWith '/__karma__/debug.html'
@@ -325,9 +301,6 @@ describe 'middleware.karma', ->
     callHandlerWith '/__karma__/something/else.js', ->
       expect(response).to.beNotServed()
       done()
-
-
-
 
 
 

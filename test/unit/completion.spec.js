@@ -1,6 +1,6 @@
 var c = require('../../lib/completion')
 
-describe('completion', function () {
+describe('completion', () => {
   var completion
 
   function mockEnv (line) {

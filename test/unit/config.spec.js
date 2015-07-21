@@ -22,14 +22,10 @@ describe('config', () => {
   }
 
   // extract only pattern properties from list of pattern objects
-  var patternsFrom = function (list) {
-    return list.map(pattern => pattern.pattern)
-  }
+  var patternsFrom = list => list.map(pattern => pattern.pattern)
 
   var wrapCfg = function (cfg) {
-    return function (config) {
-      return config.set(cfg)
-    }
+    return config => config.set(cfg)
   }
 
   beforeEach(() => {
@@ -53,7 +49,7 @@ describe('config', () => {
     m = loadFile(__dirname + '/../../lib/config.js', mocks, {
       global: {},
       process: mocks.process,
-      require: function (path) {
+      require (path) {
         if (mockConfigs[path]) {
           return mockConfigs[path]
         }
@@ -325,14 +321,13 @@ describe('config', () => {
   describe('custom', () => {
     var di = require('di')
 
-    var forwardArgsFactory = function (args) {
-      return args
-    }
+    var forwardArgsFactory = args => args
 
-    var baseModule =
-    {'preprocessor:base': ['type', forwardArgsFactory],
+    var baseModule = {
+      'preprocessor:base': ['type', forwardArgsFactory],
       'launcher:base': ['type', forwardArgsFactory],
-    'reporter:base': ['type', forwardArgsFactory]}
+      'reporter:base': ['type', forwardArgsFactory]
+    }
 
     it('should define a custom launcher', () => {
       var config = normalizeConfigWithDefaults({

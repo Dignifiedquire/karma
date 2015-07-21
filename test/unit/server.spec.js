@@ -44,7 +44,7 @@ describe('server', () => {
     mockFileList = {
       refresh: sinon.spy(() => {
         return {
-          then: function (onResolve, onReject) {
+          then (onResolve, onReject) {
             fileListOnResolve = onResolve
             fileListOnReject = onReject
           }
@@ -72,12 +72,12 @@ describe('server', () => {
     }
 
     mockWebServer = {
-      on: function (name, handler) {
+      on (name, handler) {
         if (name === 'error') {
           webServerOnError = handler
         }
       },
-      listen: sinon.spy(function (port, callback) {
+      listen: sinon.spy((port, callback) => {
         callback && callback()
       }),
       removeAllListeners: () => {},

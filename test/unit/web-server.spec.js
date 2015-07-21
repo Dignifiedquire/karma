@@ -33,7 +33,7 @@ describe('web-server', () => {
 
   var customFileHandlers = server = emitter = null
 
-  var servedFiles = function (files) {
+  var servedFiles = (files) => {
     emitter.emit('file_list_modified', {included: [], served: files})
   }
 
@@ -85,7 +85,7 @@ describe('web-server', () => {
     // TODO(vojta): change this, only keeping because karma-dart is relying on it
     customFileHandlers.push({
       urlRegex: /\/some\/weird/,
-      handler: function (request, response, staticFolder, adapterFolder, baseFolder, urlRoot) {
+      handler (request, response, staticFolder, adapterFolder, baseFolder, urlRoot) {
         response.writeHead(222)
         response.end('CONTENT')
       }

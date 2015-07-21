@@ -25,7 +25,7 @@ describe('preprocessor', () => {
   })
 
   it('should preprocess matching file', done => {
-    var fakePreprocessor = sinon.spy(function (content, file, done) {
+    var fakePreprocessor = sinon.spy((content, file, done) => {
       file.path = file.path + '-preprocessed'
       done(null, 'new-content')
     })
@@ -44,7 +44,7 @@ describe('preprocessor', () => {
   })
 
   it('should check patterns after creation when invoked', done => {
-    var fakePreprocessor = sinon.spy(function (content, file, done) {
+    var fakePreprocessor = sinon.spy((content, file, done) => {
       file.path = file.path + '-preprocessed'
       done(null, 'new-content')
     })
@@ -66,7 +66,7 @@ describe('preprocessor', () => {
   })
 
   it('should ignore not matching file', done => {
-    var fakePreprocessor = sinon.spy(function (content, file, done) {
+    var fakePreprocessor = sinon.spy((content, file, done) => {
       done(null, '')
     })
 
@@ -82,12 +82,12 @@ describe('preprocessor', () => {
   })
 
   it('should apply all preprocessors', done => {
-    var fakePreprocessor1 = sinon.spy(function (content, file, done) {
+    var fakePreprocessor1 = sinon.spy((content, file, done) => {
       file.path = file.path + '-p1'
       done(null, content + '-c1')
     })
 
-    var fakePreprocessor2 = sinon.spy(function (content, file, done) {
+    var fakePreprocessor2 = sinon.spy((content, file, done) => {
       file.path = file.path + '-p2'
       done(content + '-c2')
     })
@@ -133,7 +133,7 @@ describe('preprocessor', () => {
   })
 
   it('should compute SHA from content returned by a processor', done => {
-    var fakePreprocessor = sinon.spy(function (content, file, done) {
+    var fakePreprocessor = sinon.spy((content, file, done) => {
       done(null, content + '-processed')
     })
 
@@ -159,7 +159,7 @@ describe('preprocessor', () => {
   })
 
   it('should return error if any preprocessor fails', done => {
-    var failingPreprocessor = sinon.spy(function (content, file, done) {
+    var failingPreprocessor = sinon.spy((content, file, done) => {
       done(new Error('Some error'), null)
     })
 
@@ -178,11 +178,11 @@ describe('preprocessor', () => {
   })
 
   it('should stop preprocessing after an error', done => {
-    var failingPreprocessor = sinon.spy(function (content, file, done) {
+    var failingPreprocessor = sinon.spy((content, file, done) => {
       done(new Error('Some error'), null)
     })
 
-    var fakePreprocessor = sinon.spy(function (content, file, done) {
+    var fakePreprocessor = sinon.spy((content, file, done) => {
       done(null, content)
     })
 
@@ -202,7 +202,7 @@ describe('preprocessor', () => {
   })
 
   it('should not preprocess binary files', done => {
-    var fakePreprocessor = sinon.spy(function (content, file, done) {
+    var fakePreprocessor = sinon.spy((content, file, done) => {
       done(null, content)
     })
 

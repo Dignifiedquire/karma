@@ -11,7 +11,8 @@ describe 'init/formatters', ->
       formatter = new f.JavaScript
 
     describe 'formatAnswers', ->
-      createAnswers = (ans = {}) ->
+      createAnswers = (ans) ->
+        ans = ans or {}
         ans.frameworks = ans.frameworks or []
         ans.files = ans.files or []
         ans.onlyServedFiles = ans.onlyServedFiles or []
@@ -52,13 +53,10 @@ describe 'init/formatters', ->
           onlyServedFiles: ['src/*.js']
         }
 
-        expect(replacements.FILES).to.equal "\n      'test-main.js',\n" +
-                                      "      {pattern: 'src/*.js', included: false}"
+        expect(replacements.FILES).to.equal "\n      'test-main.js',\n      {pattern: 'src/*.js', included: false}"
 
 
       it 'should format PREPROCESSORS', ->
         replacements = formatter.formatAnswers createAnswers {preprocessors: '*.coffee': ['coffee']}
 
-        expect(replacements.PREPROCESSORS).to.equal "{\n" +
-                                                "      '*.coffee': ['coffee']\n" +
-                                                "    }"
+        expect(replacements.PREPROCESSORS).to.equal "{\n      '*.coffee': ['coffee']\n    }"
