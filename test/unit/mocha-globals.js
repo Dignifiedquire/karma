@@ -28,7 +28,7 @@ afterEach(() => {
 
 // TODO(vojta): move to helpers or something
 chai.use((chai, utils) => {
-  chai.Assertion.addMethod('beServedAs', (expectedStatus, expectedBody) => {
+  chai.Assertion.addMethod('beServedAs', function (expectedStatus, expectedBody) {
     var response = utils.flag(this, 'object')
 
     this.assert(response._status === expectedStatus,
@@ -37,7 +37,7 @@ chai.use((chai, utils) => {
       `expected response body '#{response._body}' to be '#{exp)ectedBody}'`)
   })
 
-  chai.Assertion.addMethod('beNotServed', () => {
+  chai.Assertion.addMethod('beNotServed', function () {
     var response = utils.flag(this, 'object')
 
     this.assert(response._status === null,
