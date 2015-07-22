@@ -8,7 +8,7 @@ var mocks = require('mocks')
 var HttpResponseMock = mocks.http.ServerResponse
 var HttpRequestMock = mocks.http.ServerRequest
 
-describe('middleware.runner', function () {
+describe('middleware.runner', () => {
   var nextSpy
   var response
   var mockReporter
@@ -16,68 +16,74 @@ describe('middleware.runner', function () {
   var emitter
   var config
   var executor
-  var handler = nextSpy = response = mockReporter = capturedBrowsers = emitter = config = null
-  var fileListMock = executor = null
+  var handler
+  var fileListMock
 
-  beforeEach(function () {
-    mockReporter =
-      {adapters: [],
-      write: function (msg) { return this.adapters.forEach(function (adapter) { return adapter(msg); }); }}
+  beforeEach(() => {
+    mockReporter = {
+      adapters: [],
+      write (msg) {
+        return this.adapters.forEach(adapter => adapter(msg))
+      }
+    }
 
-    executor =
-      {schedule: function () { return emitter.emit('run_start'); }}
+    executor = {
+      schedule: () => emitter.emit('run_start')
+    }
 
     emitter = new EventEmitter()
     capturedBrowsers = new BrowserCollection(emitter)
-    fileListMock =
-      {refresh: function () { return null; },
-        addFile: function () { return null; },
-        removeFile: function () { return null; },
-      changeFile: function () { return null; }}
+    fileListMock = {
+      refresh: () => null,
+      addFile: () => null,
+      removeFile: () => null,
+      changeFile: () => null
+    }
 
     nextSpy = sinon.spy()
     response = new HttpResponseMock()
     config = {client: {}, basePath: '/'}
 
-    return handler = createRunnerMiddleware(emitter, fileListMock, capturedBrowsers, new MultReporter([mockReporter]), executor, 'localhost', 8877, '/', config)
+    handler = createRunnerMiddleware(emitter, fileListMock, capturedBrowsers,
+                                     new MultReporter([mockReporter]), executor, 'localhost', 8877, '/', config)
   })
 
-  it('should trigger test run and stream the reporter', function (done) {
+  it('should trigger test run and stream the reporter', (done) => {
     capturedBrowsers.add(new Browser())
-    sinon.stub(capturedBrowsers, 'areAllReady', function () { return true; })
+    sinon.stub(capturedBrowsers, 'areAllReady', () => true)
 
-    response.once('end', function () {
+    response.once('end', () => {
       expect(nextSpy).to.not.have.been.called
       expect(response).to.beServedAs(200, 'result\x1FEXIT0')
-      return done()
+      done()
     })
 
     handler(new HttpRequestMock('/__run__'), response, nextSpy)
 
     mockReporter.write('result')
-    return emitter.emit('run_complete', capturedBrowsers, {exitCode: 0})
+    emitter.emit('run_complete', capturedBrowsers, {exitCode: 0})
   })
 
-  it('should not run if there is no browser captured', function (done) {
+  it('should not run if there is no browser captured', (done) => {
     sinon.stub(fileListMock, 'refresh')
 
-    response.once('end', function () {
+    response.once('end', () => {
       expect(nextSpy).to.not.have.been.called
       expect(response).to.beServedAs(200, 'No captured browser, open http://localhost:8877/\n')
       expect(fileListMock.refresh).not.to.have.been.called
-      return done()
+      done()
     })
 
-    return handler(new HttpRequestMock('/__run__'), response, nextSpy)
+    handler(new HttpRequestMock('/__run__'), response, nextSpy)
   })
 
-  it('should parse body and set client.args', function (done) {
+  it('should parse body and set client.args', (done) => {
     capturedBrowsers.add(new Browser())
-    sinon.stub(capturedBrowsers, 'areAllReady', function () { return true; })
+    sinon.stub(capturedBrowsers, 'areAllReady', () => true)
 
-    emitter.once('run_start', function () {
+    emitter.once('run_start', () => {
       expect(config.client.args).to.deep.equal(['arg1', 'arg2'])
-      return done()
+      done()
     })
 
     var RAW_MESSAGE = '{"args": ["arg1", "arg2"]}'
@@ -90,12 +96,12 @@ describe('middleware.runner', function () {
     handler(request, response, nextSpy)
 
     request.emit('data', RAW_MESSAGE)
-    return request.emit('end')
+    request.emit('end')
   })
 
-  it('should refresh explicit files if specified', function (done) {
+  it('should refresh explicit files if specified', (done) => {
     capturedBrowsers.add(new Browser())
-    sinon.stub(capturedBrowsers, 'areAllReady', function () { return true; })
+    sinon.stub(capturedBrowsers, 'areAllReady', () => true)
     sinon.stub(fileListMock, 'refresh')
     sinon.stub(fileListMock, 'addFile')
     sinon.stub(fileListMock, 'changeFile')
@@ -117,19 +123,19 @@ describe('middleware.runner', function () {
     request.emit('data', RAW_MESSAGE)
     request.emit('end')
 
-    return process.nextTick(function () {
+    process.nextTick(() => {
       expect(fileListMock.refresh).not.to.have.been.called
       expect(fileListMock.addFile).to.have.been.calledWith(path.resolve('/new.js'))
       expect(fileListMock.removeFile).to.have.been.calledWith(path.resolve('/foo.js'))
       expect(fileListMock.removeFile).to.have.been.calledWith(path.resolve('/bar.js'))
       expect(fileListMock.changeFile).to.have.been.calledWith(path.resolve('/changed.js'))
-      return done()
+      done()
     })
   })
 
-  it('should schedule execution if no refresh', function (done) {
+  it('should schedule execution if no refresh', (done) => {
     capturedBrowsers.add(new Browser())
-    sinon.stub(capturedBrowsers, 'areAllReady', function () { return true; })
+    sinon.stub(capturedBrowsers, 'areAllReady', () => true)
 
     sinon.stub(fileListMock, 'refresh')
     sinon.stub(executor, 'schedule')
@@ -146,35 +152,35 @@ describe('middleware.runner', function () {
     request.emit('data', RAW_MESSAGE)
     request.emit('end')
 
-    return process.nextTick(function () {
+    process.nextTick(() => {
       expect(fileListMock.refresh).not.to.have.been.called
       expect(executor.schedule).to.have.been.called
-      return done()
+      done()
     })
   })
 
-  it('should not schedule execution if refreshing and autoWatch', function (done) {
+  it('should not schedule execution if refreshing and autoWatch', (done) => {
     config.autoWatch = true
 
     capturedBrowsers.add(new Browser())
-    sinon.stub(capturedBrowsers, 'areAllReady', function () { return true; })
+    sinon.stub(capturedBrowsers, 'areAllReady', () => true)
 
     sinon.stub(fileListMock, 'refresh')
     sinon.stub(executor, 'schedule')
 
     handler(new HttpRequestMock('/__run__'), response, nextSpy)
 
-    return process.nextTick(function () {
+    process.nextTick(() => {
       expect(fileListMock.refresh).to.have.been.called
       expect(executor.schedule).not.to.have.been.called
-      return done()
+      done()
     })
   })
 
-  return it('should ignore other urls', function (done) {
-    return handler(new HttpRequestMock('/something'), response, function () {
+  it('should ignore other urls', (done) => {
+    handler(new HttpRequestMock('/something'), response, () => {
       expect(response).to.beNotServed()
-      return done()
+      done()
     })
   })
 })

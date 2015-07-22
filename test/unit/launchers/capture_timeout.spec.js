@@ -1,59 +1,60 @@
-describe('launchers/capture_timeout.js', function () {
-  var timer
-  var BaseLauncher = require('../../../lib/launchers/base')
-  var CaptureTimeoutLauncher = require('../../../lib/launchers/capture_timeout')
-  var createMockTimer = require('../mocks/timer')
-  var launcher = timer = null
+var BaseLauncher = require('../../../lib/launchers/base')
+var CaptureTimeoutLauncher = require('../../../lib/launchers/capture_timeout')
+var createMockTimer = require('../mocks/timer')
 
-  beforeEach(function () {
+describe('launchers/capture_timeout.js', () => {
+  var timer
+  var launcher
+
+  beforeEach(() => {
     timer = createMockTimer()
     launcher = new BaseLauncher('fake-id')
 
-    return sinon.spy(launcher, 'kill')
+    sinon.spy(launcher, 'kill')
   })
 
-  it('should kill if not captured in captureTimeout', function () {
+  it('should kill if not captured in captureTimeout', () => {
     CaptureTimeoutLauncher.call(launcher, timer, 10)
 
     launcher.start()
     timer.wind(20)
-    return expect(launcher.kill).to.have.been.called
+    expect(launcher.kill).to.have.been.called
   })
 
-  it('should not kill if browser got captured', function () {
+  it('should not kill if browser got captured', () => {
     CaptureTimeoutLauncher.call(launcher, timer, 10)
 
     launcher.start()
     launcher.markCaptured()
     timer.wind(20)
-    return expect(launcher.kill).not.to.have.been.called
+    expect(launcher.kill).not.to.have.been.called
   })
 
-  it('should not do anything if captureTimeout = 0', function () {
+  it('should not do anything if captureTimeout = 0', () => {
     CaptureTimeoutLauncher.call(launcher, timer, 0)
 
     launcher.start()
     timer.wind(20)
-    return expect(launcher.kill).not.to.have.been.called
+    expect(launcher.kill).not.to.have.been.called
   })
 
-  return it('should clear timeout between restarts', function (done) {
+  it('should clear timeout between restarts', done => {
     CaptureTimeoutLauncher.call(launcher, timer, 10)
 
     // simulate process finished
-    launcher.on('kill', function (onKillDone) {
+    launcher.on('kill', onKillDone => {
       launcher._done()
-      return onKillDone()
+      onKillDone()
     })
 
     launcher.start()
     timer.wind(8)
-    return launcher.kill().done(function () {
+    launcher.kill().done(() => {
       launcher.kill.reset()
       launcher.start()
       timer.wind(8)
       expect(launcher.kill).not.to.have.been.called
-      return done()
+      done()
     })
   })
 })

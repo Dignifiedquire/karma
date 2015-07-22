@@ -1,86 +1,89 @@
-describe('init/StateMachine', function () {
+var StateMachine = require('../../../lib/init/state_machine')
+
+describe('init/StateMachine', () => {
   var done
-  var StateMachine = require('../../../lib/init/state_machine')
-  var machine = done = null
+  var machine
 
-  var mockRli =
-  {close: function () { return null; },
-    write: function () { return null; },
-    prompt: function () { return null; },
-    _deleteLineLeft: function () { return null; },
-  _deleteLineRight: function () { return null; }}
+  var mockRli = {
+    close: () => null,
+    write: () => null,
+    prompt: () => null,
+    _deleteLineLeft: () => null,
+    _deleteLineRight: () => null
+  }
 
-  var mockColors =
-  {question: function () { return ''; }}
+  var mockColors = {
+    question: () => ''
+  }
 
-  beforeEach(function () {
+  beforeEach(() => {
     machine = new StateMachine(mockRli, mockColors)
-    return done = sinon.spy()
+    done = sinon.spy()
   })
 
-  it('should go through all the questions', function () {
+  it('should go through all the questions', () => {
     var questions = [
       {id: 'framework', options: ['jasmine', 'mocha']},
       {id: 'other'}
     ]
 
-    done = sinon.spy(function (answers) {
+    done = sinon.spy(answers => {
       expect(answers.framework).to.equal('jasmine')
-      return expect(answers.other).to.equal('abc')
+      expect(answers.other).to.equal('abc')
     })
 
     machine.process(questions, done)
     machine.onLine('jasmine')
     machine.onLine('abc')
-    return expect(done).to.have.been.called
+    expect(done).to.have.been.called
   })
 
-  it('should allow multiple answers', function () {
+  it('should allow multiple answers', () => {
     var questions = [
       {id: 'browsers', multiple: true}
     ]
 
-    done = sinon.spy(function (answers) {
-      return expect(answers.browsers).to.deep.equal(['Chrome', 'Safari'])
+    done = sinon.spy(answers => {
+      expect(answers.browsers).to.deep.equal(['Chrome', 'Safari'])
     })
 
     machine.process(questions, done)
     machine.onLine('Chrome')
     machine.onLine('Safari')
     machine.onLine('')
-    return expect(done).to.have.been.called
+    expect(done).to.have.been.called
   })
 
-  it('should treat spaces as confirmation of multiple answers', function () {
+  it('should treat spaces as confirmation of multiple answers', () => {
     var questions = [
       {id: 'browsers', multiple: true}
     ]
 
-    done = sinon.spy(function (answers) {
-      return expect(answers.browsers).to.deep.equal(['Chrome'])
+    done = sinon.spy(answers => {
+      expect(answers.browsers).to.deep.equal(['Chrome'])
     })
 
     machine.process(questions, done)
     machine.onLine('Chrome')
     machine.onLine(' ')
-    return expect(done).to.have.been.called
+    expect(done).to.have.been.called
   })
 
-  it('should always return array for multiple', function () {
+  it('should always return array for multiple', () => {
     var questions = [
       {id: 'empty', multiple: true}
     ]
 
-    done = sinon.spy(function (answers) {
-      return expect(answers.empty).to.deep.equal([])
+    done = sinon.spy(answers => {
+      expect(answers.empty).to.deep.equal([])
     })
 
     machine.process(questions, done)
     machine.onLine('')
-    return expect(done).to.have.been.called
+    expect(done).to.have.been.called
   })
 
-  it('should validate answers', function () {
+  it('should validate answers', () => {
     var validator = sinon.spy()
     var questions = [
       {id: 'validated', validate: validator}
@@ -90,21 +93,21 @@ describe('init/StateMachine', function () {
     machine.onLine('something')
 
     expect(done).to.have.been.called
-    return expect(validator).to.have.been.calledWith('something')
+    expect(validator).to.have.been.calledWith('something')
   })
 
-  it('should allow conditional answers', function () {
-    var ifTrue = sinon.spy(function (answers) {
+  it('should allow conditional answers', () => {
+    var ifTrue = sinon.spy(answers => {
       return answers.first === 'true'
     })
-    var ifFalse = sinon.spy(function (answers) {
+    var ifFalse = sinon.spy(answers => {
       return answers.first === 'false'
     })
 
-    done = sinon.spy(function (answers) {
+    done = sinon.spy(answers => {
       expect(answers.first).to.equal('true')
       expect(answers.onlyIfTrue).to.equal('something')
-      return expect(answers.onlyIfFalse).to.not.exist
+      expect(answers.onlyIfFalse).to.not.exist
     })
 
     var questions = [
@@ -117,13 +120,13 @@ describe('init/StateMachine', function () {
     machine.onLine('true')
     machine.onLine('something')
 
-    return expect(done).to.have.been.called
+    expect(done).to.have.been.called
   })
 
-  it('should parse booleans', function () {
-    done = sinon.spy(function (answers) {
+  it('should parse booleans', () => {
+    done = sinon.spy(answers => {
       expect(answers.yes).to.equal(true)
-      return expect(answers.no).to.equal(false)
+      expect(answers.no).to.equal(false)
     })
 
     var questions = [
@@ -135,12 +138,12 @@ describe('init/StateMachine', function () {
     machine.onLine('yes')
     machine.onLine('no')
 
-    return expect(done).to.have.been.called
+    expect(done).to.have.been.called
   })
 
-  return it('should parse booleans before validation', function () {
-    var validator = sinon.spy(function (value) {
-      return expect(typeof value).to.equal('boolean')
+  it('should parse booleans before validation', () => {
+    var validator = sinon.spy(value => {
+      expect(typeof value).to.equal('boolean')
     })
 
     var questions = [
@@ -152,6 +155,6 @@ describe('init/StateMachine', function () {
     machine.onLine('yes')
     machine.onLine('no')
 
-    return expect(validator).to.have.been.calledTwice
+    expect(validator).to.have.been.calledTwice
   })
 })

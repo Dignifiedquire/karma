@@ -1,20 +1,18 @@
-describe('launchers/retry.js', function () {
-  var timer
-  var emitter
-  var _ = require('../../../lib/helper')._
-  var BaseLauncher = require('../../../lib/launchers/base')
-  var RetryLauncher = require('../../../lib/launchers/retry')
-  var EventEmitter = require('../../../lib/events').EventEmitter
-  var createMockTimer = require('../mocks/timer')
-  var launcher = timer = emitter = null
+var _ = require('../../../lib/helper')._
+var BaseLauncher = require('../../../lib/launchers/base')
+var RetryLauncher = require('../../../lib/launchers/retry')
+var EventEmitter = require('../../../lib/events').EventEmitter
 
-  beforeEach(function () {
-    timer = createMockTimer()
+describe('launchers/retry.js', () => {
+  var emitter
+  var launcher
+
+  beforeEach(() => {
     emitter = new EventEmitter()
-    return launcher = new BaseLauncher('fake-id', emitter)
+    launcher = new BaseLauncher('fake-id', emitter)
   })
 
-  it('should restart if browser crashed', function (done) {
+  it('should restart if browser crashed', (done) => {
     RetryLauncher.call(launcher, 2)
 
     launcher.start('http://localhost:9876')
@@ -26,14 +24,14 @@ describe('launchers/retry.js', function () {
     // simulate crash
     launcher._done('crash')
 
-    return _.defer(function () {
+    _.defer(() => {
       expect(launcher.start).to.have.been.called
       expect(spyOnBrowserProcessFailure).not.to.have.been.called
-      return done()
+      done()
     })
   })
 
-  it('should eventually fail with "browser_process_failure"', function (done) {
+  it('should eventually fail with "browser_process_failure"', (done) => {
     RetryLauncher.call(launcher, 2)
 
     launcher.start('http://localhost:9876')
@@ -45,7 +43,7 @@ describe('launchers/retry.js', function () {
     // simulate first crash
     launcher._done('crash')
 
-    return _.defer(function () {
+    _.defer(() => {
       expect(launcher.start).to.have.been.called
       expect(spyOnBrowserProcessFailure).not.to.have.been.called
       launcher.start.reset()
@@ -53,7 +51,7 @@ describe('launchers/retry.js', function () {
       // simulate second crash
       launcher._done('crash')
 
-      return _.defer(function () {
+      _.defer(() => {
         expect(launcher.start).to.have.been.called
         expect(spyOnBrowserProcessFailure).not.to.have.been.called
         launcher.start.reset()
@@ -61,16 +59,16 @@ describe('launchers/retry.js', function () {
         // simulate third crash
         launcher._done('crash')
 
-        return _.defer(function () {
+        _.defer(() => {
           expect(launcher.start).not.to.have.been.called
           expect(spyOnBrowserProcessFailure).to.have.been.called
-          return done()
+          done()
         })
       })
     })
   })
 
-  return it('should not restart if killed normally', function (done) {
+  it('should not restart if killed normally', (done) => {
     RetryLauncher.call(launcher, 2)
 
     launcher.start('http://localhost:9876')
@@ -82,11 +80,11 @@ describe('launchers/retry.js', function () {
     // process just exited normally
     launcher._done()
 
-    return _.defer(function () {
+    _.defer(() => {
       expect(launcher.start).not.to.have.been.called
       expect(spyOnBrowserProcessFailure).not.to.have.been.called
       expect(launcher.state).to.equal(launcher.STATE_FINISHED)
-      return done()
+      done()
     })
   })
 })

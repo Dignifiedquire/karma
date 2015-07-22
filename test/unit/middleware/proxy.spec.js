@@ -1,15 +1,11 @@
-// ==============================================================================
-// lib/proxy.js module
-// ==============================================================================
-describe('middleware.proxy', function () {
+var httpMock = require('mocks').http
+var loadFile = require('mocks').loadFile
+
+describe('middleware.proxy', () => {
   var requestedUrl
   var response
   var nextSpy
   var type
-  var httpMock = require('mocks').http
-  var loadFile = require('mocks').loadFile
-
-  var actualOptions = requestedUrl = response = nextSpy = type = null
 
   var m = loadFile(__dirname + '/../../../lib/middleware/proxy.js')
 
@@ -23,11 +19,11 @@ describe('middleware.proxy', function () {
         type = 'web'
         requestedUrl = req.url
         res.writeHead(200)
-        return res.end('DONE')
+        res.end('DONE')
       },
       ws: function (req, socket, head) {
         type = 'ws'
-        return requestedUrl = req.url
+        requestedUrl = req.url
       }
     }
   }, {
@@ -40,11 +36,11 @@ describe('middleware.proxy', function () {
         type = 'web'
         requestedUrl = req.url
         res.writeHead(200)
-        return res.end('DONE')
+        res.end('DONE')
       },
       ws: function (req, socket, head) {
         type = 'ws'
-        return requestedUrl = req.url
+        requestedUrl = req.url
       }
     }
   }, {
@@ -57,11 +53,11 @@ describe('middleware.proxy', function () {
         type = 'web'
         requestedUrl = req.url
         res.writeHead(200)
-        return res.end('DONE')
+        res.end('DONE')
       },
       ws: function (req, socket, head) {
         type = 'ws'
-        return requestedUrl = req.url
+        requestedUrl = req.url
       }
     }
   }, {
@@ -74,76 +70,75 @@ describe('middleware.proxy', function () {
         type = 'web'
         requestedUrl = req.url
         res.writeHead(200)
-        return res.end('DONE')
+        res.end('DONE')
       },
       ws: function (req, socket, head) {
         type = 'ws'
-        return requestedUrl = req.url
+        requestedUrl = req.url
       }
     }
   }]
 
-  beforeEach(function () {
-    actualOptions = {}
+  beforeEach(() => {
     requestedUrl = ''
     type = ''
     response = new httpMock.ServerResponse()
-    return nextSpy = sinon.spy()
+    nextSpy = sinon.spy()
   })
 
-  it('should proxy requests', function (done) {
+  it('should proxy requests', (done) => {
     var proxy = m.createProxyHandler(mockProxies, true, '/', {})
     proxy(new httpMock.ServerRequest('/proxy/test.html'), response, nextSpy)
 
     expect(nextSpy).not.to.have.been.called
     expect(requestedUrl).to.equal('/test.html')
     expect(type).to.equal('web')
-    return done()
+    done()
   })
 
-  it('should proxy websocket requests', function (done) {
+  it('should proxy websocket requests', (done) => {
     var proxy = m.createProxyHandler(mockProxies, true, '/', {})
     proxy.upgrade(new httpMock.ServerRequest('/proxy/test.html'), response, nextSpy)
 
     expect(nextSpy).not.to.have.been.called
     expect(requestedUrl).to.equal('/test.html')
     expect(type).to.equal('ws')
-    return done()
+    done()
   })
 
-  it('should support multiple proxies', function () {
+  it('should support multiple proxies', () => {
     var proxy = m.createProxyHandler(mockProxies, true, '/', {})
     proxy(new httpMock.ServerRequest('/static/test.html'), response, nextSpy)
 
     expect(nextSpy).not.to.have.been.called
     expect(requestedUrl).to.equal('/test.html')
-    return expect(type).to.equal('web')
+    expect(type).to.equal('web')
   })
 
-  it('should handle nested proxies', function () {
+  it('should handle nested proxies', () => {
     var proxy = m.createProxyHandler(mockProxies, true, '/', {})
     proxy(new httpMock.ServerRequest('/sub/some/Test.html'), response, nextSpy)
 
     expect(nextSpy).not.to.have.been.called
     expect(requestedUrl).to.equal('/something/Test.html')
-    return expect(type).to.equal('web')
+    expect(type).to.equal('web')
   })
 
-  it('should call next handler if the path is not proxied', function () {
+  it('should call next handler if the path is not proxied', () => {
     var proxy = m.createProxyHandler(mockProxies, true, '/', {})
     proxy(new httpMock.ServerRequest('/non/proxy/test.html'), response, nextSpy)
 
-    return expect(nextSpy).to.have.been.called
+    expect(nextSpy).to.have.been.called
   })
 
-  it('should call next handler if no proxy defined', function () {
+  it('should call next handler if no proxy defined', () => {
     var proxy = m.createProxyHandler({}, true, '/', {})
     proxy(new httpMock.ServerRequest('/non/proxy/test.html'), response, nextSpy)
 
-    return expect(nextSpy).to.have.been.called
+    expect(nextSpy).to.have.been.called
   })
 
-  it('should parse a simple proxy config', function () {
+  it('should parse a simple proxy config', () => {
     var proxy = {'/base/': 'http://localhost:8000/'}
     var parsedProxyConfig = m.parseProxyConfig(proxy, {})
     expect(parsedProxyConfig).to.have.length(1)
@@ -154,10 +149,10 @@ describe('middleware.proxy', function () {
       path: '/base/',
       https: false
     })
-    return expect(parsedProxyConfig[0].proxy).to.exist
+    expect(parsedProxyConfig[0].proxy).to.exist
   })
 
-  it('should set defualt http port', function () {
+  it('should set defualt http port', () => {
     var proxy = {'/base/': 'http://localhost/'}
     var parsedProxyConfig = m.parseProxyConfig(proxy, {})
     expect(parsedProxyConfig).to.have.length(1)
@@ -168,10 +163,10 @@ describe('middleware.proxy', function () {
       path: '/base/',
       https: false
     })
-    return expect(parsedProxyConfig[0].proxy).to.exist
+    expect(parsedProxyConfig[0].proxy).to.exist
   })
 
-  it('should set defualt https port', function () {
+  it('should set defualt https port', () => {
     var proxy = {'/base/': 'https://localhost/'}
     var parsedProxyConfig = m.parseProxyConfig(proxy, {})
     expect(parsedProxyConfig).to.have.length(1)
@@ -182,10 +177,10 @@ describe('middleware.proxy', function () {
       path: '/base/',
       https: true
     })
-    return expect(parsedProxyConfig[0].proxy).to.exist
+    expect(parsedProxyConfig[0].proxy).to.exist
   })
 
-  it('should handle proxy configs with paths', function () {
+  it('should handle proxy configs with paths', () => {
     var proxy = {'/base': 'http://localhost:8000/proxy'}
     var parsedProxyConfig = m.parseProxyConfig(proxy, {})
     expect(parsedProxyConfig).to.have.length(1)
@@ -196,10 +191,10 @@ describe('middleware.proxy', function () {
       path: '/base',
       https: false
     })
-    return expect(parsedProxyConfig[0].proxy).to.exist
+    expect(parsedProxyConfig[0].proxy).to.exist
   })
 
-  it('should determine protocol', function () {
+  it('should determine protocol', () => {
     var proxy = {'/base': 'https://localhost:8000'}
     var parsedProxyConfig = m.parseProxyConfig(proxy, {})
     expect(parsedProxyConfig).to.have.length(1)
@@ -210,10 +205,10 @@ describe('middleware.proxy', function () {
       path: '/base',
       https: true
     })
-    return expect(parsedProxyConfig[0].proxy).to.exist
+    expect(parsedProxyConfig[0].proxy).to.exist
   })
 
-  it('should handle proxy configs with only basepaths', function () {
+  it('should handle proxy configs with only basepaths', () => {
     var proxy = {'/base': '/proxy/test'}
     var config = {port: 9877, hostname: 'localhost'}
     var parsedProxyConfig = m.parseProxyConfig(proxy, config)
@@ -225,10 +220,10 @@ describe('middleware.proxy', function () {
       path: '/base',
       https: false
     })
-    return expect(parsedProxyConfig[0].proxy).to.exist
+    expect(parsedProxyConfig[0].proxy).to.exist
   })
 
-  it('should normalize proxy url with only basepaths', function () {
+  it('should normalize proxy url with only basepaths', () => {
     var proxy = {'/base/': '/proxy/test'}
     var config = {port: 9877, hostname: 'localhost'}
     var parsedProxyConfig = m.parseProxyConfig(proxy, config)
@@ -240,10 +235,10 @@ describe('middleware.proxy', function () {
       path: '/base/',
       https: false
     })
-    return expect(parsedProxyConfig[0].proxy).to.exist
+    expect(parsedProxyConfig[0].proxy).to.exist
   })
 
-  it('should normalize proxy url', function () {
+  it('should normalize proxy url', () => {
     var proxy = {'/base/': 'http://localhost:8000/proxy/test'}
     var parsedProxyConfig = m.parseProxyConfig(proxy, {})
     expect(parsedProxyConfig).to.have.length(1)
@@ -254,10 +249,10 @@ describe('middleware.proxy', function () {
       path: '/base/',
       https: false
     })
-    return expect(parsedProxyConfig[0].proxy).to.exist
+    expect(parsedProxyConfig[0].proxy).to.exist
   })
 
-  it('should parse nested proxy config', function () {
+  it('should parse nested proxy config', () => {
     var proxy = {
       '/sub': 'http://localhost:9000',
       '/sub/some': 'http://gstatic.com/something'
@@ -279,10 +274,10 @@ describe('middleware.proxy', function () {
       path: '/sub',
       https: false
     })
-    return expect(parsedProxyConfig[1].proxy).to.exist
+    expect(parsedProxyConfig[1].proxy).to.exist
   })
 
-  return it('should handle empty proxy config', function () {
-    return expect(m.parseProxyConfig({})).to.deep.equal([])
+  it('should handle empty proxy config', () => {
+    expect(m.parseProxyConfig({})).to.deep.equal([])
   })
 })
