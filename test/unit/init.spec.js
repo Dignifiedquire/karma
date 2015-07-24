@@ -1,6 +1,6 @@
+import path from 'path'
 describe('init', () => {
   var loadFile = require('mocks').loadFile
-  var path = require('path')
   var m = null
 
   beforeEach(() => {

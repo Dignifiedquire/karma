@@ -1,6 +1,6 @@
 var _ = require('../../../lib/helper')._
-var BaseLauncher = require('../../../lib/launchers/base')
-var EventEmitter = require('../../../lib/events').EventEmitter
+import BaseLauncher from '../../../lib/launchers/base'
+import {EventEmitter} from '../../../lib/events'
 
 describe('launchers/base.js', () => {
   var emitter

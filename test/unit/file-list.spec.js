@@ -1,7 +1,7 @@
-var Promise = require('bluebird')
-var EventEmitter = require('events').EventEmitter
-var mocks = require('mocks')
-var proxyquire = require('proxyquire')
+import Promise from 'bluebird'
+import {EventEmitter} from 'events'
+import mocks from 'mocks'
+import proxyquire from 'proxyquire'
 var helper = require('../../lib/helper')
 var _ = helper._
 

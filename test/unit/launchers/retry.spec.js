@@ -1,7 +1,7 @@
 var _ = require('../../../lib/helper')._
-var BaseLauncher = require('../../../lib/launchers/base')
-var RetryLauncher = require('../../../lib/launchers/retry')
-var EventEmitter = require('../../../lib/events').EventEmitter
+import BaseLauncher from '../../../lib/launchers/base'
+import RetryLauncher from '../../../lib/launchers/retry'
+import {EventEmitter} from '../../../lib/events'
 
 describe('launchers/retry.js', () => {
   var emitter

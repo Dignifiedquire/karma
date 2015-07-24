@@ -1,5 +1,5 @@
-var Server = require('../../lib/server')
-var BrowserCollection = require('../../lib/browser_collection')
+import Server from '../../lib/server'
+import BrowserCollection from '../../lib/browser_collection'
 
 describe('server', () => {
   var mockConfig

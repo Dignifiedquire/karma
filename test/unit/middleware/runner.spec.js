@@ -1,10 +1,10 @@
-var path = require('path')
-var EventEmitter = require('events').EventEmitter
-var Browser = require('../../../lib/browser')
-var BrowserCollection = require('../../../lib/browser_collection')
-var MultReporter = require('../../../lib/reporters/multi')
+import path from 'path'
+import {EventEmitter} from 'events'
+import Browser from '../../../lib/browser'
+import BrowserCollection from '../../../lib/browser_collection'
+import MultReporter from '../../../lib/reporters/multi'
 var createRunnerMiddleware = require('../../../lib/middleware/runner').create
-var mocks = require('mocks')
+import mocks from 'mocks'
 var HttpResponseMock = mocks.http.ServerResponse
 var HttpRequestMock = mocks.http.ServerRequest
 

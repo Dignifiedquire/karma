@@ -1,6 +1,7 @@
+import mocks from 'mocks'
+
 describe('middleware.strip_host', function () {
   var nextSpy
-  var mocks = require('mocks')
   var HttpRequestMock = mocks.http.ServerRequest
 
   var createStripHostMiddleware = require('../../../lib/middleware/strip_host').create

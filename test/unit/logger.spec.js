@@ -1,4 +1,4 @@
-var loadFile = require('mocks').loadFile
+import {loadFile} from 'mocks'
 
 describe('logger', () => {
   var m

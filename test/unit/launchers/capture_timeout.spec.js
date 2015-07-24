@@ -1,6 +1,6 @@
-var BaseLauncher = require('../../../lib/launchers/base')
-var CaptureTimeoutLauncher = require('../../../lib/launchers/capture_timeout')
-var createMockTimer = require('../mocks/timer')
+import BaseLauncher from '../../../lib/launchers/base'
+import CaptureTimeoutLauncher from '../../../lib/launchers/capture_timeout'
+import createMockTimer from '../mocks/timer'
 
 describe('launchers/capture_timeout.js', () => {
   var timer
