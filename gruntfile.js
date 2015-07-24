@@ -28,15 +28,18 @@ module.exports = function (grunt) {
     },
     mochaTest: {
       options: {
-        ui: 'bdd',
+        require: [
+          'babel/register'
+        ],
         reporter: 'dot',
+        ui: 'bdd',
         quite: false,
         colors: true
       },
       unit: {
         src: [
-          'test/unit/mocha-globals.coffee',
-          'test/unit/**/*.coffee'
+          'test/unit/mocha-globals.js',
+          'test/unit/**/*.spec.js'
         ]
       }
     },
@@ -64,6 +67,9 @@ module.exports = function (grunt) {
       }
     },
     eslint: {
+      options: {
+        quiet: true
+      },
       target: [
         '<%= files.server %>',
         '<%= files.grunt %>',
@@ -71,23 +77,6 @@ module.exports = function (grunt) {
         '<%= files.client %>',
         'test/**/*.js'
       ]
-    },
-    coffeelint: {
-      unittests: {
-        files: {
-          src: ['test/unit/**/*.coffee']
-        }
-      },
-      taskstests: {
-        files: {
-          src: ['test/tasks/**/*.coffee']
-        }
-      },
-      options: {
-        max_line_length: {
-          value: 100
-        }
-      }
     },
     'npm-publish': {
       options: {
@@ -128,7 +117,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', ['browserify:client'])
   grunt.registerTask('default', ['build', 'test', 'lint'])
-  grunt.registerTask('lint', ['eslint', 'coffeelint'])
+  grunt.registerTask('lint', ['eslint'])
 
   grunt.registerTask('release', 'Build, bump and publish to NPM.', function (type) {
     grunt.task.run([
