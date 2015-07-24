@@ -1,10 +1,9 @@
-var http = require('http')
-var mocks = require('mocks')
-var request = require('supertest-as-promised')
-var helper = require('../../../lib/helper')
-var File = require('../../../lib/file')
-var Url = require('../../../lib/url')
-var createServeFile = require('../../../lib/middleware/common').createServeFile
+import http from 'http'
+import mocks from 'mocks'
+import request from 'supertest-as-promised'
+import helper from '../../../lib/helper'
+import File from '../../../lib/file'
+import {createServeFile} from '../../../lib/middleware/common'
 var createSourceFilesMiddleware = require('../../../lib/middleware/source_files').create
 
 describe('middleware.source_files', function () {
@@ -47,17 +46,13 @@ describe('middleware.source_files', function () {
 
   beforeEach(function () {
     files = helper.defer()
-    return server = createServer(files, serveFile, '/base/path')
+    server = createServer(files, serveFile, '/base/path')
+    return server
   })
 
   afterEach(function () {
     return next.reset()
   })
-
-  // helpers
-  var includedFiles = function (list) {
-    return files.resolve({included: list, served: []})
-  }
 
   var servedFiles = function (list) {
     return files.resolve({included: [], served: list})

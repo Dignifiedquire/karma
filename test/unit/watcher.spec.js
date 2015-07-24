@@ -1,7 +1,10 @@
+import mocks from 'mocks'
+import path from 'path'
+
 describe('watcher', () => {
-  var mocks = require('mocks')
+
   var config = require('../../lib/config')
-  var path = require('path')
+
   var m = null
 
   beforeEach(() => {

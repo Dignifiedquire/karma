@@ -1,8 +1,8 @@
-var helper = require('../../../lib/helper')
-var constants = require('../../../lib/constants')
-var File = require('../../../lib/file')
-var Url = require('../../../lib/url')
-var mocks = require('mocks')
+import helper from '../../../lib/helper'
+import constants from '../../../lib/constants'
+import File from '../../../lib/file'
+import Url from '../../../lib/url'
+import mocks from 'mocks'
 
 var HttpResponseMock = mocks.http.ServerResponse
 var HttpRequestMock = mocks.http.ServerRequest

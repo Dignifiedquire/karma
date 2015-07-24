@@ -6,7 +6,8 @@ describe('reporter', function () {
   var m = null
 
   beforeEach(function () {
-    return m = loadFile(__dirname + '/../../../lib/reporters/base.js')
+    m = loadFile(__dirname + '/../../../lib/reporters/base.js')
+    return m
   })
 
   return describe('Progress', function () {
@@ -15,7 +16,8 @@ describe('reporter', function () {
 
     beforeEach(function () {
       adapter = sinon.spy()
-      return reporter = new m.BaseReporter(null, null, adapter)
+      reporter = new m.BaseReporter(null, null, adapter)
+      return reporter
     })
 
     it('should write to all registered adapters', function () {

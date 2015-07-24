@@ -1,8 +1,8 @@
-var cli = require('../../lib/cli')
-var optimist = require('optimist')
-var path = require('path')
-var constant = require('../../lib/constants')
-var mocks = require('mocks')
+import cli from '../../lib/cli'
+import optimist from 'optimist'
+import path from 'path'
+import constant from '../../lib/constants'
+import mocks from 'mocks'
 var loadFile = mocks.loadFile
 
 describe('cli', () => {

@@ -1,4 +1,4 @@
-var StateMachine = require('../../../lib/init/state_machine')
+import StateMachine from '../../../lib/init/state_machine'
 
 describe('init/StateMachine', () => {
   var done

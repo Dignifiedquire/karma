@@ -1,14 +1,13 @@
 require('core-js')
-var request = require('supertest-as-promised')
-var di = require('di')
-var mocks = require('mocks')
+import {EventEmitter} from 'events'
+import request from 'supertest-as-promised'
+import di from 'di'
+import mocks from 'mocks'
 
 describe('web-server', () => {
   var server
   var emitter
   var File = require('../../lib/file')
-
-  var EventEmitter = require('events').EventEmitter
 
   var _mocks = {}
   var _globals = {__dirname: '/karma/lib'}

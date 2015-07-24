@@ -1,4 +1,4 @@
-var formatters = require('../../../lib/init/formatters')
+import formatters from '../../../lib/init/formatters'
 describe('init/formatters', () => {
   var formatter
 

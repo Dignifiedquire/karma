@@ -1,8 +1,8 @@
-var Promise = require('bluebird')
-var di = require('di')
-var events = require('../../lib/events')
-var launcher = require('../../lib/launcher')
-var createMockTimer = require('./mocks/timer')
+import Promise from 'bluebird'
+import di from 'di'
+import events from '../../lib/events'
+import launcher from '../../lib/launcher'
+import createMockTimer from './mocks/timer'
 
 // promise mock
 var stubPromise = (obj, method, stubAction) => {

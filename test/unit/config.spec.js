@@ -1,5 +1,5 @@
 var loadFile = require('mocks').loadFile
-var path = require('path')
+import path from 'path'
 var helper = require('../../lib/helper')
 var logger = require('../../lib/logger.js')
 

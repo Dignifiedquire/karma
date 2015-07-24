@@ -67,6 +67,9 @@ module.exports = function (grunt) {
       }
     },
     eslint: {
+      options: {
+        quiet: true
+      },
       target: [
         '<%= files.server %>',
         '<%= files.grunt %>',

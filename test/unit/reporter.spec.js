@@ -1,6 +1,6 @@
-var EventEmitter = require('events').EventEmitter
-var File = require('../../lib/file')
-var loadFile = require('mocks').loadFile
+import {EventEmitter} from 'events'
+import File from '../../lib/file'
+import {loadFile} from 'mocks'
 var _ = require('../../lib/helper')._
 
 describe('reporter', () => {

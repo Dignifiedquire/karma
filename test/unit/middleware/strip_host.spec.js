@@ -1,38 +1,17 @@
+import mocks from 'mocks'
+
 describe('middleware.strip_host', function () {
-  var filesDeferred
   var nextSpy
-  var response
-  var mocks = require('mocks')
-  var HttpResponseMock = mocks.http.ServerResponse
   var HttpRequestMock = mocks.http.ServerRequest
 
-  var File = require('../../../lib/file')
-  var Url = require('../../../lib/url')
-
-  var fsMock = mocks.fs.create({
-    base: {
-      path: {
-        'a.js': mocks.fs.file(0, 'js-src-a'),
-        'index.html': mocks.fs.file(0, '<html>')
-      }
-    },
-    src: {
-      'some.js': mocks.fs.file(0, 'js-source')
-    },
-    'utf8ášč': {
-      'some.js': mocks.fs.file(0, 'utf8-file')
-    }
-  })
-
-  var serveFile = require('../../../lib/middleware/common').createServeFile(fsMock, null)
   var createStripHostMiddleware = require('../../../lib/middleware/strip_host').create
 
-  var handler = filesDeferred = nextSpy = response = null
+  var handler = nextSpy = null
 
   beforeEach(function () {
     nextSpy = sinon.spy()
-    var request = null
-    return handler = createStripHostMiddleware(null, null, '/base/path')
+    handler = createStripHostMiddleware(null, null, '/base/path')
+    return handler
   })
 
   it('should strip request with IP number', function (done) {

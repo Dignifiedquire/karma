@@ -1,6 +1,5 @@
-var EmitterWrapper = require('../../lib/emitter_wrapper')
-var events = require('events')
-var EventEmitter = events.EventEmitter
+import EmitterWrapper from '../../lib/emitter_wrapper'
+import {EventEmitter} from 'events'
 
 describe('emitter_wrapper', () => {
   var emitter

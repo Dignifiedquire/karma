@@ -1,5 +1,5 @@
-var mocks = require('mocks')
-var di = require('di')
+import mocks from 'mocks'
+import di from 'di'
 
 describe('preprocessor', () => {
   var pp
