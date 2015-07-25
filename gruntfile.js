@@ -33,7 +33,7 @@ module.exports = function (grunt) {
         ],
         reporter: 'dot',
         ui: 'bdd',
-        quite: false,
+        quiet: false,
         colors: true
       },
       unit: {

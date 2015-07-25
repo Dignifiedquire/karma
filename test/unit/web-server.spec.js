@@ -47,7 +47,8 @@ describe('web-server', () => {
       fileList: ['value', null],
       capturedBrowsers: ['value', null],
       reporter: ['value', null],
-      executor: ['value', null]
+      executor: ['value', null],
+      proxies: ['value', null]
     }])
 
     server = injector.invoke(m.createWebServer)
